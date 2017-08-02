@@ -1,12 +1,15 @@
 {
   "name": "mocha-chrome",
   "version": "0.1.0",
-  "description": "coming soon",
+  "description": "☕  Run Mocha tests using Google Chrome in Node.js",
   "main": "index.js",
   "scripts": {
     "bdd": "mocha test/test.js",
     "lint": "eslint index.js test/*.js",
     "test": "npm run lint && npm run bdd"
+  },
+  "bin": {
+    "mocha-chrome": "./bin/mocha-chrome"
   },
   "engines": {
     "node": ">= 7.6.0"
@@ -19,11 +22,13 @@
   },
   "license": "MIT",
   "dependencies": {
+    "chalk": "^2.0.1",
     "chrome-launcher": "^0.3.2",
     "chrome-remote-interface": "^0.24.2",
     "chrome-unmirror": "^0.1.0",
     "deep-assign": "^2.0.0",
     "loglevel": "^1.4.1",
+    "meow": "^3.7.0",
     "nanobus": "^4.2.0"
   },
   "devDependencies": {
