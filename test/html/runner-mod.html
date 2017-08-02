@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <title>Test</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../node_modules/mocha/mocha.css" />
+    <script src="../../node_modules/mocha/mocha.js"></script>
+    <script src="../../node_modules/chai/chai.js"></script>
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <script>
+      expect = chai.expect;
+
+      describe('Event Tests', function() {
+        it('Fails tests', function() {
+          console.log('from test')
+          expect(1).to.be.ok;
+        });
+      });
+
+      var runner = mocha.run(function() {
+        console.log('Run callback fired');
+      });
+      // because reporters also bind to the 'test end' event when reporting their status,
+      // we need to call 'runner.fail' to mark the test as failed before the runner
+      // gets the test status. Here, we prepend our 'test end' handler to the beginning
+      // of the list.
+      runner.$events['test end'].unshift(function(test) {
+        console.log('from runner')
+        runner.fail(test, new Error('Failed via an event'));
+      });
+    </script>
+  </body>
+</html>

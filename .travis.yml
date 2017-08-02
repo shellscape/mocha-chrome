@@ -1,0 +1,15 @@
+sudo: false
+language: node_js
+node_js:
+  - 7
+  - 8
+
+before_script:
+  - node --version
+  - npm --version
+
+script:
+  - npm test
+
+matrix:
+  fast_finish: true

@@ -1,0 +1,35 @@
+{
+  "name": "mocha-chrome",
+  "version": "0.1.0",
+  "description": "coming soon",
+  "main": "index.js",
+  "scripts": {
+    "bdd": "mocha test/test.js",
+    "lint": "eslint index.js test/*.js",
+    "test": "npm run lint && npm run bdd"
+  },
+  "engines": {
+    "node": ">= 7.6.0"
+  },
+  "repository": "shellscape/mocha-chrome",
+  "author": {
+    "name": "Andrew Powell",
+    "email": "andrew@shellscape.org",
+    "url": "shellscape.org"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "chrome-launcher": "^0.3.2",
+    "chrome-remote-interface": "^0.24.2",
+    "chrome-unmirror": "^0.1.0",
+    "deep-assign": "^2.0.0",
+    "loglevel": "^1.4.1",
+    "nanobus": "^4.2.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.0",
+    "eslint": "^4.3.0",
+    "eslint-config-shellscape": "^1.0.0",
+    "mocha": "^3.5.0"
+  }
+}
