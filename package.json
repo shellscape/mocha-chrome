@@ -4,7 +4,7 @@
   "description": "☕  Run Mocha tests using Google Chrome in Node.js",
   "main": "index.js",
   "scripts": {
-    "bdd": "mocha test/test.js",
+    "bdd": "mocha test/test.js --timeout 10000",
     "lint": "eslint index.js test/*.js",
     "test": "npm run lint && npm run bdd"
   },
