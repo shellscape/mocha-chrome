@@ -20,10 +20,12 @@ function test (options) {
   const runner = new MochaChrome(options);
   const result = new Promise((resolve, reject) => {
     runner.on('ended', stats => {
+      console.log('>>> ended');
       resolve(stats);
     });
 
     runner.on('failure', message => {
+      console.log('>>> failure');
       reject(message);
     });
   });
@@ -98,4 +100,4 @@ describe('MochaChrome', () => {
     });
   });
 
-});
+}).timeout(5000);
