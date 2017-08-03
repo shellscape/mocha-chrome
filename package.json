@@ -1,7 +1,7 @@
 {
   "name": "mocha-chrome",
   "version": "0.1.0",
-  "description": "☕  Run Mocha tests using Google Chrome in Node.js",
+  "description": "☕  Run Mocha tests using headless Google Chrome",
   "main": "index.js",
   "scripts": {
     "bdd": "mocha test/test.js --timeout 10000",

@@ -1,6 +1,6 @@
 # mocha-chrome
 
-:coffee: Run Mocha tests using Google Chrome in Node.js
+:coffee: Run Mocha tests using headless Google Chrome
 
 [![Build Status](https://travis-ci.org/shellscape/mocha-chrome.svg?branch=master)](https://travis-ci.org/shellscape/mocha-chrome)
 [![Known Vulnerabilities](https://snyk.io/test/github/shellscape/mocha-chrome/badge.svg)](https://snyk.io/test/github/shellscape/mocha-chrome)
@@ -12,7 +12,7 @@
 
 ## Getting Started
 
-To begin, you'll need to install this module:
+To begin, you'll need to install `mocha-chrome`:
 
 ```console
 $ npm install mocha-chrome --save-dev
