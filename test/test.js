@@ -100,4 +100,4 @@ describe('MochaChrome', () => {
     });
   });
 
-}).timeout(5000);
+});
