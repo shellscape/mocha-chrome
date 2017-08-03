@@ -23,7 +23,7 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.0.1",
-    "chrome-launcher": "^0.3.2",
+    "chrome-launcher": "^0.4.0",
     "chrome-remote-interface": "^0.24.2",
     "chrome-unmirror": "^0.1.0",
     "deep-assign": "^2.0.0",
