@@ -118,7 +118,7 @@ class MochaChrome {
         if (this.closed) {
           return;
         }
-        
+
         const expression = '(function () { return !!window.mocha; })()';
         let res = await this.client.Runtime.evaluate({ expression });
 

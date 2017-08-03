@@ -31,8 +31,12 @@
       delete window.Mocha;
       window.Mocha = m;
 
-      m.process.stdout.write = function (s) {
-        window._eventbus.emit('mocha', s);
+      m.process.stdout._write = function (chunks, encoding, cb) {
+        var output = chunks.toString ? chunks.toString() : chunks;
+
+        window._eventbus.emit('mocha', output);
+
+        m.process.nextTick(cb);
       };
 
       window._eventbus.emit('width');

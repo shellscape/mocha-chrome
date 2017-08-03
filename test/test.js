@@ -84,7 +84,7 @@ describe('MochaChrome', () => {
   it('supports mixed tests', () => {
     return test({ file: 'mixed',
       mocha: {
-        reporter: 'xunit'
+        reporter: 'dot'
       }
     }).then(({passes, failures}) => {
       expect(passes).to.equal(6);

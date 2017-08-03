@@ -11,6 +11,9 @@
     <script>
       expect = chai.expect;
 
+      mocha.ui('bdd');
+      mocha.reporter('html');
+
       describe('Tests', function() {
         it('passes 1', function() {
           expect(1).to.be.ok;
