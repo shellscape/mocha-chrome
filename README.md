@@ -167,3 +167,12 @@ Yep, that's it.
 ## Contributing
 
 We welcome your contributions! Please have a read of [CONTRIBUTING](CONTRIBUTING.md).
+
+## Attribution
+
+I'd like to thank @nathanboktae for his work on [mocha-phantomjs](https://github.com/nathanboktae/mocha-phantomjs)
+and [mocha-phantomjs-core](https://github.com/nathanboktae/mocha-phantomjs-core);
+two projects I've used extensively over the years, and from which the inspiration
+for this module originates. Many of the nuances of working with mocha in a hosted
+or connected browser environment were solved within `mocha-phantomjs-core` and I
+am personally grateful.
