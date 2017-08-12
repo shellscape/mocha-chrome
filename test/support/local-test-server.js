@@ -11,8 +11,7 @@ const DefaultOptions = {
   testMountPoint: '/',
   useHttps: true,
   certPath: path.resolve(__dirname, 'ssl/insecure-cert.pem'),
-  keyPath: path.resolve(__dirname, 'ssl/insecure-key.pem'),
-  logLevel: 'error'
+  keyPath: path.resolve(__dirname, 'ssl/insecure-key.pem')
 };
 
 
