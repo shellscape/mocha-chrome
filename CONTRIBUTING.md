@@ -1,5 +1,5 @@
 # Welcome!
-> Thanks ahead for taking the time to contribute to this project
+:heart: Thanks for your interest and time in contributing to this project.
 
 ## What We Use
 
@@ -14,6 +14,8 @@ changes by running:
 ```console
 $ npm run lint
 ```
+
+Please avoid committing `package-lock.json` files.
 
 Please don't change variable or parameter names to match your
 personal preferences, unless the change is part of a refactor
