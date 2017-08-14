@@ -37,7 +37,6 @@ function test (options) {
   return result;
 }
 
-
 describe('MochaChrome', () => {
 
   it('fails if mocha isn\'t loaded', () => {
@@ -108,7 +107,6 @@ describe('MochaChrome', () => {
       server = new LocalTestServer();
       server.mountStatic('/node_modules/mocha', path.dirname(require.resolve('mocha')));
       server.mountStatic('/node_modules/chai', path.dirname(require.resolve('chai')));
-      // @shellscape would you prefer these mocha/chai mount points, or a new test fixture file?
       return server.start();
     });
 
