@@ -147,7 +147,7 @@ through the Chrome Devtools Protocol to `mocha-chrome`.
 
 ### Third-Party Reporters
 
-Third party reporters are currently supported, but support is planned. Contributoion
+Third party reporters are not currently supported, but support is planned. Contribution
 on that effort is of course welcome.
 
 ## Continuous Integration
