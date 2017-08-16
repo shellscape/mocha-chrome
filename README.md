@@ -150,6 +150,32 @@ through the Chrome Devtools Protocol to `mocha-chrome`.
 Third party reporters are not currently supported, but support is planned. Contribution
 on that effort is of course welcome.
 
+### Cookies and the `file://` Protocol
+
+Chrome has long-since disabled cookies for files loaded via the `file://` protocol.
+The once-available `--enable-file-cookies` has been removed and we're left with few options.
+If you're in need of cookie support for your local-file test, you may use the following snippet,
+which will shim `document.cookie` with _very basic_ support:
+
+```js
+  Object.defineProperty(document, 'cookie', {
+    get: function () {
+      return this.value || '';
+    },
+    set: function (cookie) {
+      pair = pair || '';
+
+      const cutoff = cookie.indexOf(';');
+      const pair = cookie.substring(0, cutoff >= 0 ? cutoff : cookie.length);
+      const cookies = (this.value || '').split('; ');
+
+      cookies.push(pair);
+
+      return this.value = cookies.join('; ');
+    }
+  });
+```
+
 ## Continuous Integration
 
 Please refer to the _"Running it all on Travis CI"_ portion of the guide on [Automated testing with Headless Chrome](https://developers.google.com/web/updates/2017/06/headless-karma-mocha-chai) from
