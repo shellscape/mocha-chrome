@@ -163,11 +163,11 @@ which will shim `document.cookie` with _very basic_ support:
       return this.value || '';
     },
     set: function (cookie) {
-      pair = pair || '';
+      cookie = cookie || '';
 
       const cutoff = cookie.indexOf(';');
       const pair = cookie.substring(0, cutoff >= 0 ? cutoff : cookie.length);
-      const cookies = (this.value || '').split('; ');
+      const cookies = this.value ? this.value.split('; ') : [];
 
       cookies.push(pair);
 
