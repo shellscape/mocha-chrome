@@ -57,7 +57,7 @@ if (!/^(file|http(s?)):\/\//.test(file)) {
 }
 
 const mochaDefaults = {
-  reporter: 'spec',
+  reporter: flags.reporter || 'spec',
   useColors: !flags.colors
 };
 const mocha = deepAssign(mochaDefaults, JSON.parse(flags.mocha || '{}'));
