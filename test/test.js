@@ -5,13 +5,14 @@ const deepAssign = require('deep-assign');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
+const LocalTestServer = require('./support/local-test-server.js');
 
 const MochaChrome = require('../index');
 const expect = chai.expect;
 
 function test (options) {
-  const url = 'file://' + path.join(__dirname, '/html', options.file + '.html');
-
+  const url = options.url || ('file://' + path.join(__dirname, '/html', options.file + '.html'));
+  
   options = deepAssign(options = {
     url,
     mocha: { useColors: false }
@@ -98,4 +99,25 @@ describe('MochaChrome', () => {
     });
   });
 
+
+  describe('with fixture pages on https://localhost', () => {
+    let server;
+
+    before(() => {
+      server = new LocalTestServer();
+      server.mountStatic('/node_modules/mocha', path.dirname(require.resolve('mocha')));
+      server.mountStatic('/node_modules/chai', path.dirname(require.resolve('chai')));
+      return server.start();
+    });
+
+    after(() => server.stop());
+    
+    it('runs a test page', () => {
+      return test({ url: server.getHost() + '/test.html' }).then(({passes, failures}) => {
+        expect(passes).to.equal(1);
+        expect(failures).to.equal(0);
+      });
+    });
+
+  });
 });
