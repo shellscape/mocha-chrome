@@ -13,11 +13,12 @@ const cli = meow(chalk`{underline Usage}
 
 
 {underline Options}
-  --mocha      A JSON string representing a config object to pass to Mocha
-  --log-level  Specify a log level; trace, debug, info, warn, error
-  --no-colors  Disable colors in Mocha's output
-  --reporter   Specify the Mocha reporter to use
-  --timeout    Specify the test startup timeout to use
+  --mocha                     A JSON string representing a config object to pass to Mocha
+  --log-level                 Specify a log level; trace, debug, info, warn, error
+  --no-colors                 Disable colors in Mocha's output
+  --reporter                  Specify the Mocha reporter to use
+  --timeout                   Specify the test startup timeout to use
+  --ignore-resource-errors    Suppress resource error logging
 
 
 {underline Examples}
@@ -62,7 +63,8 @@ const mochaDefaults = {
 };
 const mocha = deepAssign(mochaDefaults, JSON.parse(flags.mocha || '{}'));
 const logLevel = flags.logLevel || 'error';
-const options = { url, logLevel, mocha };
+const ignoreResourceErrors = flags.ignoreResourceErrors || false
+const options = { url, logLevel, mocha, ignoreResourceErrors };
 const runner = new MochaChrome(options);
 
 runner.on('ended', stats => {
