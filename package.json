@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "bdd": "mocha test/test.js --timeout 10000",
-    "lint": "eslint index.js test/*.js",
+    "lint": "eslint index.js test/*.js lib/*.js",
     "test": "npm run lint && npm run bdd"
   },
   "bin": {
