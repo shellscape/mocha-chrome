@@ -4,7 +4,7 @@
   "description": "☕  Run Mocha tests using headless Google Chrome",
   "main": "index.js",
   "scripts": {
-    "bdd": "mocha test/test.js --timeout 10000",
+    "bdd": "mocha test/test.js test/cli.js --timeout 10000",
     "lint": "eslint index.js bin/* lib/*.js test/*.js",
     "test": "npm run lint && npm run bdd"
   },
@@ -35,6 +35,7 @@
     "chai": "^4.1.0",
     "eslint": "^4.3.0",
     "eslint-config-shellscape": "^1.0.1",
+    "execa": "^0.8.0",
     "mocha": "^3.5.0"
   }
 }

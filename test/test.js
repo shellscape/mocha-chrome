@@ -14,7 +14,10 @@ function test (options) {
 
   options = deepAssign(options = {
     url,
-    mocha: { useColors: false }
+    mocha: { useColors: false },
+    ignoreConsole: true,
+    ignoreExceptions: true,
+    ignoreResourceErrors: true
   }, options);
 
   const runner = new MochaChrome(options);
