@@ -21,6 +21,8 @@ class MochaChrome {
       chromeFlags: [],
       loadTimeout: 1000,
       logLevel: 'error',
+      ignoreExceptions: false,
+      ignoreConsole: false,
       ignoreResourceErrors: false,
       mocha: {
         reporter: 'spec',
@@ -97,7 +99,7 @@ class MochaChrome {
 
     this.bus.watch(DOMStorage);
 
-    chromeOut(log, Runtime);
+    chromeOut(log, this.options, Runtime);
     network(this.bus, log, Network, this.options.ignoreResourceErrors);
 
     this.client = client;
