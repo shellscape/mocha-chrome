@@ -87,7 +87,8 @@ runner.on('failure', message => {
 
 runner.on('exit', () => process.exit(code));
 
-(async function run () {
-  await runner.connect();
-  await runner.run();
-})();
+runner
+  .connect()
+  .then(()=> {
+    runner.run(runner);
+  });

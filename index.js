@@ -86,27 +86,34 @@ class MochaChrome {
     this.loadError = false;
   }
 
-  async connect () {
+  connect () {
+    return new Promise((resolve, reject) => {
+      createInstance(log, this.options).then((instance) => {
+        connectClient(instance, log, this.options)
+          .then((client) => {
+            const {DOMStorage, Network, Runtime} = client;
 
-    const instance = await createInstance(log, this.options);
-    const client = await connectClient(instance, log, this.options);
-    const { DOMStorage, Network, Runtime } = client;
+            if (!client) {
+              fail('CDP Client could not connect');
+              return;
+            }
 
-    if (!client) {
-      fail('CDP Client could not connect');
-      return;
-    }
+            this.bus.watch(DOMStorage);
 
-    this.bus.watch(DOMStorage);
+            chromeOut(log, this.options, Runtime);
+            network(this.bus, log, Network, this.options.ignoreResourceErrors);
 
-    chromeOut(log, this.options, Runtime);
-    network(this.bus, log, Network, this.options.ignoreResourceErrors);
+            this.client = client;
+            this.instance = instance;
 
-    this.client = client;
-    this.instance = instance;
+            resolve();
+          })
+          .catch(reject);
+      }).catch(reject);
+    });
   }
 
-  async run () {
+  run () {
     this.client.Page.loadEventFired(() => {
       if (this.closed) {
         return;
@@ -117,26 +124,28 @@ class MochaChrome {
         return;
       }
 
-      setTimeout(async () => {
+      setTimeout(() => {
         if (this.closed) {
           return;
         }
 
         const expression = '(function () { return !!window.mocha; })()';
-        let res = await this.client.Runtime.evaluate({ expression });
+        this.client.Runtime.evaluate({ expression }).then((res)=>{
+          if (!unmirror(res.result)) {
+            this.fail(`mocha was not found in the page within ${this.options.loadTimeout}ms of the page loading.`);
+          }
 
-        if (!unmirror(res.result)) {
-          this.fail(`mocha was not found in the page within ${this.options.loadTimeout}ms of the page loading.`);
-        }
+          if (!this.started) {
+            this.fail(`mocha.run() was not called within ${this.options.loadTimeout}ms of the page loading.`);
+          }
+        });
 
-        if (!this.started) {
-          this.fail(`mocha.run() was not called within ${this.options.loadTimeout}ms of the page loading.`);
-        }
+
       }, this.options.loadTimeout);
 
     });
 
-    await this.client.Page.navigate({ url: this.options.url });
+    return this.client.Page.navigate({ url: this.options.url });
   }
 
   on (name, fn) {
@@ -153,12 +162,15 @@ class MochaChrome {
     this.exit(1);
   }
 
-  async exit (code) {
+  exit (code) {
     this.closed = true;
-    await this.client.close();
-    await this.instance.kill();
+    this.client.close().then(() => {
+      return this.instance.kill();
+    }).then(() => {
+      this.bus.emit('exit', 1);
+    });
 
-    this.bus.emit('exit', 1);
+
   }
 
 }
