@@ -88,7 +88,7 @@ runner.on('failure', message => {
 runner.on('exit', () => process.exit(code));
 
 runner
- .connect()
- .then(()=> {
-    runner.run(runner)
- })
+  .connect()
+  .then(()=> {
+    runner.run(runner);
+  });
