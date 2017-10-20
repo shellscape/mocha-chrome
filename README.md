@@ -14,6 +14,8 @@
 
 `mocha-chrome`requires Node v8.0.0 or higher. Unfortunately the project won't be supporting a lower version number at this time. If you're in a situation where Node cannot be upgraded on a production server, not to worry! `mocha-chrome` is a dev tool, which means you can use tools like [NVM](https://github.com/creationix/nvm) and [nodenv](https://github.com/nodenv/nodenv) to manage your installed versions, and temporarily switch to v8+ to run tests on your machine. Most modern CI environments also support specifying the version of Node to run.
 
+Because `mocha-chrome` is a development-environment tool, you may also choose to use [`babel-register`](https://babeljs.io/docs/usage/babel-register/) in the top-level file executing `mocha-chrome` and instruct `babel` not to ignore `node_modules`. Using that method, you'll be able to acheive version compatibility to Node 4.x. 
+
 ## Getting Started
 
 To begin, you'll need to install `mocha-chrome`:
