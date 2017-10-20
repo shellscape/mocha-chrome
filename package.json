@@ -23,8 +23,8 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.0.1",
-    "chrome-launcher": "^0.6.0",
-    "chrome-remote-interface": "^0.24.2",
+    "chrome-launcher": "^0.8.1",
+    "chrome-remote-interface": "^0.25.2",
     "chrome-unmirror": "^0.1.0",
     "deep-assign": "^2.0.0",
     "loglevel": "^1.4.1",
@@ -36,6 +36,6 @@
     "eslint": "^4.3.0",
     "eslint-config-shellscape": "^1.0.1",
     "execa": "^0.8.0",
-    "mocha": "^3.5.0"
+    "mocha": "^4.0.1"
   }
 }
