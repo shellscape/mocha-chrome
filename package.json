@@ -4,12 +4,12 @@
   "description": "☕  Run Mocha tests using headless Google Chrome",
   "main": "index.js",
   "scripts": {
-    "bdd": "mocha test/test.js test/cli.js --timeout 10000",
+    "bdd": "mocha test/test.js --timeout 10000",
     "lint": "eslint index.js bin/* lib/*.js test/*.js",
     "test": "npm run lint && npm run bdd"
   },
   "bin": {
-    "mocha-chrome": "./bin/mocha-chrome"
+    "mocha-chrome": "./cli.js"
   },
   "engines": {
     "node": ">= 7.6.0"
@@ -22,11 +22,18 @@
   },
   "license": "MIT",
   "dependencies": {
+    "babel-plugin-transform-es2015-destructuring": "^6.23.0",
+    "babel-plugin-transform-es2015-parameters": "^6.24.1",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
     "chalk": "^2.0.1",
     "chrome-launcher": "^0.8.1",
     "chrome-remote-interface": "^0.25.2",
     "chrome-unmirror": "^0.1.0",
+    "debug": "^3.1.0",
     "deep-assign": "^2.0.0",
+    "import-local": "^0.1.1",
     "loglevel": "^1.4.1",
     "meow": "^3.7.0",
     "nanobus": "^4.2.0"
