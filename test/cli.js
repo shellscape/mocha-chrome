@@ -36,4 +36,14 @@ describe('mocha-chrome binary', () => {
     });
   });
 
+  it('should default to "spec" reporter', async () => {
+    const { code, stdout } = await cli(['test/html/test.html'], {cwd});
+    expect(stdout).to.match(/✓/);
+  });
+
+  it('should honor --spec parameter', async () => {
+    const { code, stdout } = await cli(['--reporter', 'tap', 'test/html/test.html'], {cwd});
+    expect(stdout).to.match(/ok/);
+    expect(stdout).not.to.match(/✓/);
+  });
 });
