@@ -1,6 +1,6 @@
 {
   "name": "mocha-chrome",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "☕  Run Mocha tests using headless Google Chrome",
   "main": "index.js",
   "scripts": {
