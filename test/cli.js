@@ -4,10 +4,13 @@ const chai = require('chai');
 const execa = require('execa');
 const path = require('path');
 
-const busted = /v4|v6/.test(process.version) ? '--old-and-busted' : '';
 const cli = (args, opts) => {
   const cliPath = path.join(cwd, 'cli');
-  const params = [cliPath].concat(args, busted);
+  const params = [cliPath].concat(args);
+
+  if (/v4|v6/.test(process.version)) {
+    params.push('--old-and-busted');
+  }
 
   return execa(process.execPath, params, opts);
 };
@@ -45,5 +48,11 @@ describe('mocha-chrome binary', () => {
     const { code, stdout } = await cli(['--reporter', 'tap', 'test/html/test.html'], {cwd});
     expect(stdout).to.match(/ok/);
     expect(stdout).not.to.match(/✓/);
+  });
+
+  it('should allow use of --chrome-flags', async () => {
+    const chromeFlags = JSON.stringify(['--allow-file-access-from-files']);
+    const { code, stdout } = await cli(['test/html/test.html', '--chrome-flags', chromeFlags], {cwd});
+    expect(code).to.equal(0);
   });
 });

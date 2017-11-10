@@ -5,7 +5,7 @@ if (/v6|v4/.test(process.version)) {
     ignore: /node_modules\/(?!mocha-chrome|chrome-launcher|lighthouse-logger)/
   });
   require('babel-polyfill');
-
-  require('./api');
-  require('./cli');
 }
+
+require('./api');
+require('./cli');
