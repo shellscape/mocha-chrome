@@ -86,11 +86,19 @@ $ mocha-chrome --help
     $ mocha-chrome <file.html> [options]
 
   Options
-    --mocha      A JSON string representing a config object to pass to Mocha
-    --log-level  Specify a log level; trace, debug, info, warn, error
-    --no-colors  Disable colors in Mocha's output
-    --reporter   Specify the Mocha reporter to use
-    --timeout    Specify the test startup timeout to use
+    --chrome-flags              A JSON string representing an array of flags to pass to Chrome
+    --ignore-console            Suppress console logging
+    --ignore-exceptions         Suppress exceptions logging
+    --ignore-resource-errors    Suppress resource error logging
+    --log-level                 Specify a log level; trace, debug, info, warn, error
+    --mocha                     A JSON string representing a config object to pass to Mocha
+    --no-colors                 Disable colors in Mocha's output
+    --old-and-busted            Take pity upon users of old-node. This option will run moche-chrome
+                                under Node < 8 using babel-register. Use at your own risk, and
+                                without support.
+    --reporter                  Specify the Mocha reporter to use
+    --timeout                   Specify the test startup timeout to use
+    --version
 
   Examples
     $ mocha-chrome test.html --no-colors
