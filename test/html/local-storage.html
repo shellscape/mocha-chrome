@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>Test</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../node_modules/mocha/mocha.css" />
+    <script src="../../node_modules/mocha/mocha.js"></script>
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <script>
+      mocha.ui('bdd');
+
+      describe('Tests using localStorage', function() {
+        afterEach(function() {
+          localStorage.clear();
+        });
+        it('can set an item', function() {
+          localStorage.setItem('foo', 'bar');
+        });
+        it('fails after setting an item', function() {
+          localStorage.setItem('baz', 'quz');
+          throw new Error('oh no!');
+        })
+        it('can set an item named bus', function() {
+          localStorage.setItem('bus', '{');
+        });
+      });
+
+      mocha.run();
+    </script>
+  </body>
+</html>

@@ -99,4 +99,11 @@ describe('MochaChrome', () => {
     });
   });
 
+  it('supports test using and clearing localStorage', () => {
+    return test({ file: 'local-storage' }).then(({passes, failures}) => {
+      expect(passes).to.equal(2);
+      expect(failures).to.equal(1);
+    });
+  });
+
 });
