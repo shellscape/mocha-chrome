@@ -55,4 +55,9 @@ describe('mocha-chrome binary', () => {
     const { code, stdout } = await cli(['test/html/test.html', '--chrome-flags', chromeFlags], {cwd});
     expect(code).to.equal(0);
   });
+
+  it('should use the --timeout flag value', async () => {
+    const { code, stdout } = await cli(['--timeout', '2000', 'test/html/mocha-run-timeout-1500.html'], {cwd});
+    expect(stdout).to.match(/✓/);
+  });
 });
