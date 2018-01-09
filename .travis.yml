@@ -4,8 +4,7 @@ node_js:
   - 7
   - 8
 
-dist: trusty # Chrome needs Ubuntu Trusty
-
+sudo: required
 addons:
   chrome: stable
 
