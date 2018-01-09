@@ -213,6 +213,17 @@ Please refer to the _"Running it all on Travis CI"_ portion of the guide on [Aut
 Google. Though the article primarily addresses Karma, the setup for Travis CI is
 identical.
 
+### _Update: January 8th, 2018_
+
+Travis CI has upgraded from Trusty -> Xenial to address the
+[Meltdown](https://en.wikipedia.org/wiki/Meltdown_(security_vulnerability))
+security vulnerability. There are issues with Chrome in
+Xenial that can currently be worked around with `sudo: required`.
+At some point this workaround may be removable. For the near term,
+please add `sudo: required` to Travis CI configuration files. 
+See [travis-ci/travis-ci#8836](travis-ci/travis-ci#8836).
+Credit: [@smalls](https://github.com/shellscape/mocha-chrome/pull/21).
+
 ## Testing mocha-chrome
 
 ```console
