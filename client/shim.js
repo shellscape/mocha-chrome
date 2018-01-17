@@ -75,16 +75,18 @@
     let origError = console.error,
       origLog = console.log;
 
+    function safeStringify(arg) {
+      try {
+        return JSON.stringify(arg);
+      }
+      catch (_) {
+        return '[Circular]';
+      }
+    }
+      
     console.format = function (f) {
       if (typeof f !== 'string') {
-        return Array.prototype.map.call(arguments, (arg) => {
-          try {
-            return JSON.stringify(arg);
-          }
-          catch (_) {
-            return '[Circular]';
-          }
-        }).join(' ');
+        return Array.prototype.map.call(arguments, safeStringify).join(' ');
       }
       var i = 1,
         args = arguments,
@@ -95,13 +97,7 @@
           switch (x) {
             case '%s': return String(args[i++]);
             case '%d': return Number(args[i++]);
-            case '%j':
-              try {
-                return JSON.stringify(args[i++]);
-              }
-              catch (_) {
-                return '[Circular]';
-              }
+            case '%j': return safeStringify(args[i++]);
             default:
               return x;
           }
@@ -112,7 +108,7 @@
           str += ' ' + x;
         }
         else {
-          str += ' ' + JSON.stringify(x);
+          str += ' ' + safeStringify(x);
         }
       }
       return str;
