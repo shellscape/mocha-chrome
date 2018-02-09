@@ -123,7 +123,7 @@ Example usage can be found in both [test.js](test/test.js) and [bin/mocha-chrome
 
   Fired when all tests have ended.
 
-  ##### Parameters
+##### Parameters
   `stats` : `object` - A Mocha stats object. eg:
 
   ```js
