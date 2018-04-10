@@ -4,7 +4,7 @@
   "description": "☕  Run Mocha tests using headless Google Chrome",
   "main": "index.js",
   "scripts": {
-    "bdd": "mocha test/test.js --timeout 10000",
+    "bdd": "mocha test/test.js --timeout 10000 --exit",
     "lint": "eslint index.js bin/* lib/*.js test/*.js",
     "test": "npm run lint && npm run bdd"
   },
@@ -28,21 +28,21 @@
     "babel-preset-env": "^1.6.1",
     "babel-register": "^6.26.0",
     "chalk": "^2.0.1",
-    "chrome-launcher": "^0.8.1",
+    "chrome-launcher": "^0.10.2",
     "chrome-remote-interface": "^0.25.2",
     "chrome-unmirror": "^0.1.0",
     "debug": "^3.1.0",
     "deep-assign": "^2.0.0",
-    "import-local": "^0.1.1",
+    "import-local": "^1.0.0",
     "loglevel": "^1.4.1",
-    "meow": "^3.7.0",
+    "meow": "^4.0.0",
     "nanobus": "^4.2.0"
   },
   "devDependencies": {
     "chai": "^4.1.0",
     "eslint": "^4.3.0",
     "eslint-config-shellscape": "^1.0.1",
-    "execa": "^0.8.0",
-    "mocha": "^4.0.1"
+    "execa": "^0.10.0",
+    "mocha": "^5.0.5"
   }
 }

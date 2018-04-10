@@ -75,18 +75,38 @@
     let origError = console.error,
       origLog = console.log;
 
-    function safeStringify(arg) {
-      try {
-        return JSON.stringify(arg);
+    // stringify() and serizlier() from https://github.com/moll/json-stringify-safe
+    function stringify (obj, replacer, spaces, cycleReplacer) {
+      if (typeof replacer !== 'function') {
+        replacer = null;
       }
-      catch (_) {
-        return '[Circular]';
-      }
+      return JSON.stringify(obj, serializer(replacer, cycleReplacer), spaces);
     }
-      
+
+    function serializer (replacer, cycleReplacer) {
+      var stack = [], keys = [];
+
+      if (cycleReplacer == null) cycleReplacer = function (key, value) {
+        if (stack[0] === value) return "[Circular ~]";
+        return "[Circular ~." + keys.slice(0, stack.indexOf(value)).join(".") + "]";
+      };
+
+      return function (key, value) {
+        if (stack.length > 0) {
+          var thisPos = stack.indexOf(this);
+          ~thisPos ? stack.splice(thisPos + 1) : stack.push(this);
+          ~thisPos ? keys.splice(thisPos, Infinity, key) : keys.push(key);
+          if (~stack.indexOf(value)) value = cycleReplacer.call(this, key, value);
+        }
+        else stack.push(value);
+
+        return replacer == null ? value : replacer.call(this, key, value);
+      };
+    }
+
     console.format = function (f) {
       if (typeof f !== 'string') {
-        return Array.prototype.map.call(arguments, safeStringify).join(' ');
+        return Array.prototype.map.call(arguments, stringify).join(' ');
       }
       var i = 1,
         args = arguments,
@@ -97,7 +117,7 @@
           switch (x) {
             case '%s': return String(args[i++]);
             case '%d': return Number(args[i++]);
-            case '%j': return safeStringify(args[i++]);
+            case '%j': return stringify(args[i++]);
             default:
               return x;
           }
@@ -108,7 +128,7 @@
           str += ' ' + x;
         }
         else {
-          str += ' ' + safeStringify(x);
+          str += ' ' + stringify(x);
         }
       }
       return str;

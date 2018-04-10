@@ -112,5 +112,5 @@ describe('MochaChrome', () => {
       expect(failures).to.equal(0);
     });
   });
-    
+
 });
