@@ -106,4 +106,11 @@ describe('MochaChrome', () => {
     });
   });
 
+  it('handles circular structures in console.log', () => {
+    return test({ file: 'circular' }).then(({passes, failures}) => {
+      expect(passes).to.equal(1);
+      expect(failures).to.equal(0);
+    });
+  });
+    
 });
