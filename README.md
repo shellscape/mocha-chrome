@@ -18,7 +18,7 @@ users may choose to use the `--old-and-busted` flag, because your version is not
 the new hotness - it's old and busted;
 
 ```console
---old-and-busted            Take pity upon users of old-node. This option will run moche-chrome
+--old-and-busted            Take pity upon users of old-node. This option will run mocha-chrome
                             under Node < 8 using babel-register. Use at your own risk, and
                             without support.
 ```
@@ -93,7 +93,7 @@ $ mocha-chrome --help
     --log-level                 Specify a log level; trace, debug, info, warn, error
     --mocha                     A JSON string representing a config object to pass to Mocha
     --no-colors                 Disable colors in Mocha's output
-    --old-and-busted            Take pity upon users of old-node. This option will run moche-chrome
+    --old-and-busted            Take pity upon users of old-node. This option will run mocha-chrome
                                 under Node < 8 using babel-register. Use at your own risk, and
                                 without support.
     --reporter                  Specify the Mocha reporter to use
