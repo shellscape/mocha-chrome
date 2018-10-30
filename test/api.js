@@ -37,6 +37,47 @@ function test (options) {
   return result;
 }
 
+function testOutput (options) {
+  const url = 'file://' + path.join(__dirname, '/html', options.file + '.html');
+
+  options = deepAssign(options = {
+    url,
+    mocha: { useColors: false },
+    ignoreConsole: false,
+    ignoreExceptions: true,
+    ignoreResourceErrors: true
+  }, options);
+
+  const runner = new MochaChrome(options);
+  const result = new Promise((resolve, reject) => {
+    const write = process.stdout.write;
+    let output = '';
+
+    process.stdout.write = (write => {
+      return (string, encoding, fd) => {
+        output += string;
+      };
+    })(process.stdout.write);
+
+    runner.on('ended', () => {
+      process.stdout.write = write;
+      resolve(output);
+    });
+
+    runner.on('failure', message => {
+      process.stdout.write = write;
+      reject(message);
+    });
+  });
+
+  (async function () {
+    await runner.connect();
+    await runner.run();
+  })();
+
+  return result;
+}
+
 describe('MochaChrome', () => {
 
   it('fails if mocha isn\'t loaded', () => {
@@ -110,6 +151,20 @@ describe('MochaChrome', () => {
     return test({ file: 'circular' }).then(({passes, failures}) => {
       expect(passes).to.equal(1);
       expect(failures).to.equal(0);
+    });
+  });
+
+  it('patches unicode symbols', () => {
+    return testOutput({ file: 'test' }).then(output => {
+      if ('win32' == process.platform) {
+        expect(output).to.include('\u221A');
+        expect(output).to.not.include("✓");
+        expect(output).to.not.include("âœ“");
+      }
+      else {
+        expect(output).to.include("✓");
+        expect(output).to.not.include("âœ“");
+      }
     });
   });
 
