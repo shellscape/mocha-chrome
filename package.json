@@ -12,7 +12,7 @@
     "mocha-chrome": "./cli.js"
   },
   "engines": {
-    "node": ">= 8.14.0"
+    "node": ">= 8.0.0"
   },
   "repository": "shellscape/mocha-chrome",
   "author": {
@@ -22,10 +22,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/polyfill": "^7.2.5",
-    "@babel/preset-env": "^7.2.3",
-    "@babel/register": "^7.0.0",
     "chalk": "^2.0.1",
     "chrome-launcher": "^0.10.2",
     "chrome-remote-interface": "^0.27.0",

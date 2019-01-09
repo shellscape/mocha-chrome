@@ -11,10 +11,6 @@ const cli = (args, opts) => {
   const cliPath = path.join(cwd, 'cli');
   const params = [cliPath].concat(args);
 
-  if (/v4|v6/.test(process.version)) {
-    params.push('--old-and-busted');
-  }
-
   return execa(process.execPath, params, opts);
 };
 

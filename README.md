@@ -12,26 +12,9 @@
 
 ## Requirements
 
-`mocha-chrome`requires Node v8.0.0 or higher. Unfortunately the project won't be
-_directly_ supporting a lower version number at this time. However, old-node
-users may choose to use the `--old-and-busted` flag, because your version is not
-the new hotness - it's old and busted;
+`mocha-chrome` requires Node v8.0.0 or higher.
 
-```console
---old-and-busted            Take pity upon users of old-node. This option will run mocha-chrome
-                            under Node < 8 using @babel/register. Use at your own risk, and
-                            without support.
-```
-
-That will run the **cli** using `@babel/register`, which inherently runs slower
-due to the nature of `@babel/register`. If you're attempting to use the **api**,
-you'll have to mimic the `.babelrc` and `@babel/register` setup in this repo.
-
-`mocha-chrome` is a dev tool, which means you can use tools like
-[NVM](https://github.com/creationix/nvm) and [nodenv](https://github.com/nodenv/nodenv)
-to manage your installed versions, and temporarily switch to v8+ to run tests on
-your machine. Most modern CI environments also support specifying the version of
-Node to run.
+`mocha-chrome` is a development tool, which means you can use tools like [NVM](https://github.com/creationix/nvm) and [nodenv](https://github.com/nodenv/nodenv) to manage your installed versions, and temporarily switch to v8+ to run tests on your machine. Most modern CI environments also support specifying the version of Node to run.
 
 ## Getting Started
 
@@ -73,9 +56,7 @@ To run the tests, you'll need an HTML file with some basics:
 
 ```
 
-You can then add your tests either through an external script file or
-inline within a `<script>` tag. Running the tests is easy, either with the CLI
-binary, or programmatically.
+You can then add your tests either through an external script file or inline within a `<script>` tag. Running the tests is easy, either with the CLI binary, or programmatically.
 
 ## CLI
 
@@ -93,9 +74,6 @@ $ mocha-chrome --help
     --log-level                 Specify a log level; trace, debug, info, warn, error
     --mocha                     A JSON string representing a config object to pass to Mocha
     --no-colors                 Disable colors in Mocha's output
-    --old-and-busted            Take pity upon users of old-node. This option will run mocha-chrome
-                                under Node < 8 using @babel/register. Use at your own risk, and
-                                without support.
     --reporter                  Specify the Mocha reporter to use
     --timeout                   Specify the test startup timeout to use
     --version
