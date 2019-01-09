@@ -1,20 +1,21 @@
 #!/usr/bin/env node
-'use strict';
+
+/* eslint-disable global-require */
+
 const debug = require('debug')('mocha-chrome');
 const importLocal = require('import-local');
 
 // Prefer the local installation of AVA
 if (importLocal(__filename)) {
   debug('Using local install of mocha-chrome');
-}
-else {
+} else {
   // feel pity for folks whose sad IT departments keep them in the dark ages
-  // here's to you, Node 4 and 6 hermits 🍻
+  // here's to you, node v6 hermits 🍻
   if (process.argv.indexOf('--old-and-busted') >= 0) {
-    require('babel-register')({
-      ignore: /node_modules\/(?!mocha-chrome|chrome-launcher|lighthouse-logger)/
+    require('@babel/register')({
+      ignore: [/node_modules\/(?!mocha-chrome|chrome-launcher|lighthouse-logger)/]
     });
-    require('babel-polyfill');
+    require('@babel/polyfill');
   }
 
   require('./lib/cli');

@@ -1,12 +1,12 @@
 {
   "presets": [
-    ["env", {
-      "targets": {
-        "node": "4.8"
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": "6.14.0"
+        }
       }
-    }]
-  ],
-  "plugins": [
-    "transform-es2015-parameters"
+    ]
   ]
 }

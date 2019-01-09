@@ -1,4 +1,7 @@
-'use strict';
+const deepAssign = require('deep-assign');
+
+const log = require('loglevel');
+const unmirror = require('chrome-unmirror');
 
 const createInstance = require('./lib/instance');
 const connectClient = require('./lib/client');
@@ -6,30 +9,31 @@ const EventBus = require('./lib/event-bus');
 const chromeOut = require('./lib/chrome-out');
 const network = require('./lib/network');
 
-const deepAssign = require('deep-assign');
-const log = require('loglevel');
-const unmirror = require('chrome-unmirror');
-
-process.on('unhandledRejection', error => {
+process.on('unhandledRejection', (error) => {
+  const { error: stderr } = console;
   // this should always output to console.error, regardless of loglevel
-  console.error('Promise Rejection: ', error);
+  stderr('Promise Rejection: ', error);
 });
 
 class MochaChrome {
-  constructor (options) {
-    options = deepAssign({
-      chromeFlags: [],
-      loadTimeout: 1000,
-      logLevel: 'error',
-      ignoreExceptions: false,
-      ignoreConsole: false,
-      ignoreResourceErrors: false,
-      mocha: {
-        reporter: 'spec',
-        ui: 'bdd',
-        useColors: true
-      }
-    }, options);
+  constructor(options) {
+    // eslint-disable-next-line no-param-reassign
+    options = deepAssign(
+      {
+        chromeFlags: [],
+        loadTimeout: 1000,
+        logLevel: 'error',
+        ignoreExceptions: false,
+        ignoreConsole: false,
+        ignoreResourceErrors: false,
+        mocha: {
+          reporter: 'spec',
+          ui: 'bdd',
+          useColors: true
+        }
+      },
+      options
+    );
 
     log.setDefaultLevel('error');
     log.setLevel(options.logLevel);
@@ -40,22 +44,23 @@ class MochaChrome {
       this.fail('`options.url` must be specified to run tests');
     }
 
-    bus.on('ready', content => {
-      this.client.Runtime.evaluate({ expression: `mocha.setup({ reporter: 'spec' })`});
+    bus.on('ready', (/* content */) => {
+      this.client.Runtime.evaluate({ expression: `mocha.setup({ reporter: 'spec' })` });
     });
 
-    bus.on('mocha', content => {
+    bus.on('mocha', (content) => {
       process.stdout.write(content);
     });
 
-    bus.on('width', content => {
-      const columns = parseInt(process.env.COLUMNS || process.stdout.columns) * .75 | 0;
+    bus.on('width', (/* content */) => {
+      // eslint-disable-next-line no-bitwise
+      const columns = (parseInt(process.env.COLUMNS || process.stdout.columns, 10) * 0.75) | 0;
       const expression = `Mocha.reporters.Base.window.width = ${columns};`;
 
       this.client.Runtime.evaluate({ expression });
     });
 
-    bus.on('config', content => {
+    bus.on('config', (/* content */) => {
       const config = JSON.stringify(options.mocha);
       const expression = `mocha.setup(${config})`;
 
@@ -69,15 +74,14 @@ class MochaChrome {
       if (tests === 0) {
         this.fail('mocha.run() was called with no tests');
       }
-
     });
 
-    bus.on('ended', stats => {
+    bus.on('ended', (stats) => {
       this.ended = true;
       this.exit(stats.failures);
     });
 
-    bus.on('resourceFailed', data => {
+    bus.on('resourceFailed', (/* data */) => {
       this.loadError = true;
     });
 
@@ -86,14 +90,13 @@ class MochaChrome {
     this.loadError = false;
   }
 
-  async connect () {
-
+  async connect() {
     const instance = await createInstance(log, this.options);
     const client = await connectClient(instance, log, this.options);
     const { DOMStorage, Network, Runtime } = client;
 
     if (!client) {
-      fail('CDP Client could not connect');
+      this.fail('CDP Client could not connect');
       return;
     }
 
@@ -106,14 +109,14 @@ class MochaChrome {
     this.instance = instance;
   }
 
-  async run () {
+  async run() {
     this.client.Page.loadEventFired(() => {
       if (this.closed) {
         return;
       }
 
       if (this.loadError) {
-        this.fail('Failed to load the page. Check the url: ' + this.options.url);
+        this.fail(`Failed to load the page. Check the url: ${this.options.url}`);
         return;
       }
 
@@ -123,27 +126,32 @@ class MochaChrome {
         }
 
         const expression = '(function () { return !!window.mocha; })()';
-        let res = await this.client.Runtime.evaluate({ expression });
+        const res = await this.client.Runtime.evaluate({ expression });
 
         if (!unmirror(res.result)) {
-          this.fail(`mocha was not found in the page within ${this.options.loadTimeout}ms of the page loading.`);
+          this.fail(
+            `mocha was not found in the page within ${
+              this.options.loadTimeout
+            }ms of the page loading.`
+          );
         }
 
         if (!this.started) {
-          this.fail(`mocha.run() was not called within ${this.options.loadTimeout}ms of the page loading.`);
+          this.fail(
+            `mocha.run() was not called within ${this.options.loadTimeout}ms of the page loading.`
+          );
         }
       }, this.options.loadTimeout);
-
     });
 
     await this.client.Page.navigate({ url: this.options.url });
   }
 
-  on (name, fn) {
+  on(name, fn) {
     this.bus.on(name, fn);
   }
 
-  fail (message) {
+  fail(message) {
     log.error('Mocha-Chrome Failed:', message || '');
 
     if (this.bus) {
@@ -153,15 +161,13 @@ class MochaChrome {
     this.exit(1);
   }
 
-  async exit (code) {
+  async exit(/* code */) {
     this.closed = true;
     await this.client.close();
     await this.instance.kill();
 
     this.bus.emit('exit', 1);
   }
-
 }
-
 
 module.exports = MochaChrome;

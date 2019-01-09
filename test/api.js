@@ -1,35 +1,39 @@
-const chai = require('chai');
-const deepAssign = require('deep-assign');
-const fs = require('fs');
+/* eslint-disable func-names, no-param-reassign, no-console */
 const path = require('path');
-const url = require('url');
+
+const deepAssign = require('deep-assign');
+const chai = require('chai');
 
 const MochaChrome = require('../index');
-const expect = chai.expect;
 
-function test (options) {
-  const url = 'file://' + path.join(__dirname, '/html', options.file + '.html');
+const { expect } = chai;
 
-  options = deepAssign(options = {
-    url,
-    mocha: { useColors: false },
-    ignoreConsole: true,
-    ignoreExceptions: true,
-    ignoreResourceErrors: true
-  }, options);
+function test(options) {
+  const url = `file://${path.join(__dirname, '/html', `${options.file}.html`)}`;
+
+  options = deepAssign(
+    (options = {
+      url,
+      mocha: { useColors: false },
+      ignoreConsole: true,
+      ignoreExceptions: true,
+      ignoreResourceErrors: true
+    }),
+    options
+  );
 
   const runner = new MochaChrome(options);
   const result = new Promise((resolve, reject) => {
-    runner.on('ended', stats => {
+    runner.on('ended', (stats) => {
       resolve(stats);
     });
 
-    runner.on('failure', message => {
+    runner.on('failure', (message) => {
       reject(message);
     });
   });
 
-  (async function () {
+  (async function() {
     await runner.connect();
     await runner.run();
   })();
@@ -38,79 +42,71 @@ function test (options) {
 }
 
 describe('MochaChrome', () => {
+  it("fails if mocha isn't loaded", () =>
+    test({ file: 'no-mocha' }).catch((message) => {
+      expect(message).to.equal(
+        'mocha was not found in the page within 1000ms of the page loading.'
+      );
+    }));
 
-  it('fails if mocha isn\'t loaded', () => {
-    return test({ file: 'no-mocha' }).catch(message => {
-      expect(message).to.equal('mocha was not found in the page within 1000ms of the page loading.');
-    });
-  });
-
-  it('fails if mocha.run isn\'t called', () => {
-    return test({ file: 'no-run' }).catch(message => {
+  it("fails if mocha.run isn't called", () =>
+    test({ file: 'no-run' }).catch((message) => {
       expect(message).to.equal('mocha.run() was not called within 1000ms of the page loading.');
-    });
-  });
+    }));
 
-  it('runs a test', () => {
-    return test({ file: 'test' }).then(({passes, failures}) => {
+  it('runs a test', () =>
+    test({ file: 'test' }).then(({ passes, failures }) => {
       expect(passes).to.equal(1);
       expect(failures).to.equal(0);
-    });
-  });
+    }));
 
-  it('reports a failure', () => {
-    return test({ file: 'fail' }).then(({passes, failures}) => {
+  it('reports a failure', () =>
+    test({ file: 'fail' }).then(({ failures }) => {
       expect(failures).to.equal(1);
-    });
-  });
+    }));
 
-  it('allows runner modification', () => {
-    return test({ file: 'runner-mod' }).then(({passes, failures}) => {
+  it('allows runner modification', () =>
+    test({ file: 'runner-mod' }).then(({ passes, failures }) => {
       expect(passes).to.equal(1);
       expect(failures).to.equal(1);
-    });
-  });
+    }));
 
-  it('supports different reporters', () => {
-    return test({ file: 'reporter',
+  it('supports different reporters', () =>
+    test({
+      file: 'reporter',
       mocha: {
         reporter: 'xunit'
       }
-    }).then(({passes, failures}) => {
+    }).then(({ passes, failures }) => {
       expect(passes).to.equal(1);
       expect(failures).to.equal(0);
-    });
-  });
+    }));
 
-  it('supports mixed tests', () => {
-    return test({ file: 'mixed',
+  it('supports mixed tests', () =>
+    test({
+      file: 'mixed',
       mocha: {
         reporter: 'dot'
       }
-    }).then(({passes, failures}) => {
+    }).then(({ passes, failures }) => {
       expect(passes).to.equal(6);
       expect(failures).to.equal(6);
-    });
-  });
+    }));
 
-  it('reports async failures', () => {
-    return test({ file: 'fail-async' }).then(({passes, failures}) => {
+  it('reports async failures', () =>
+    test({ file: 'fail-async' }).then(({ failures }) => {
       expect(failures).to.equal(3);
-    });
-  });
+    }));
 
-  it('supports test using and clearing localStorage', () => {
-    return test({ file: 'local-storage' }).then(({passes, failures}) => {
+  it('supports test using and clearing localStorage', () =>
+    test({ file: 'local-storage' }).then(({ passes, failures }) => {
       expect(passes).to.equal(2);
       expect(failures).to.equal(1);
-    });
-  });
+    }));
 
-  it('handles circular structures in console.log', () => {
-    return test({ file: 'circular' }).then(({passes, failures}) => {
+  it('handles circular structures in console.log', () =>
+    test({ file: 'circular' }).then(({ passes, failures }) => {
       expect(passes).to.equal(1);
       expect(failures).to.equal(0);
-    });
-  });
-
+    }));
 });

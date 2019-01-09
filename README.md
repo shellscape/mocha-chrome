@@ -19,13 +19,13 @@ the new hotness - it's old and busted;
 
 ```console
 --old-and-busted            Take pity upon users of old-node. This option will run mocha-chrome
-                            under Node < 8 using babel-register. Use at your own risk, and
+                            under Node < 8 using @babel/register. Use at your own risk, and
                             without support.
 ```
 
-That will run the **cli** using `babel-register`, which inherently runs slower
-due to the nature of `babel-register`. If you're attempting to use the **api**,
-you'll have to mimic the `.babelrc` and `babel-register` setup in this repo.
+That will run the **cli** using `@babel/register`, which inherently runs slower
+due to the nature of `@babel/register`. If you're attempting to use the **api**,
+you'll have to mimic the `.babelrc` and `@babel/register` setup in this repo.
 
 `mocha-chrome` is a dev tool, which means you can use tools like
 [NVM](https://github.com/creationix/nvm) and [nodenv](https://github.com/nodenv/nodenv)
@@ -94,7 +94,7 @@ $ mocha-chrome --help
     --mocha                     A JSON string representing a config object to pass to Mocha
     --no-colors                 Disable colors in Mocha's output
     --old-and-busted            Take pity upon users of old-node. This option will run mocha-chrome
-                                under Node < 8 using babel-register. Use at your own risk, and
+                                under Node < 8 using @babel/register. Use at your own risk, and
                                 without support.
     --reporter                  Specify the Mocha reporter to use
     --timeout                   Specify the test startup timeout to use
@@ -234,7 +234,7 @@ Yep, that's it.
 
 ## Contributing
 
-We welcome your contributions! Please have a read of [CONTRIBUTING](CONTRIBUTING.md).
+We welcome your contributions! Please have a read of [CONTRIBUTING](.github/CONTRIBUTING.md).
 
 ## Attribution
 

@@ -1,0 +1,20 @@
+{
+  "extends": "shellscape",
+  "globals": {
+    "mochaOptions": true,
+    "window": true
+  },
+  "rules": {
+    "func-names": "off",
+    "no-bitwise": "off",
+    "no-console": "off",
+    "no-global-assign": "off",
+    "no-inner-declarations": "off",
+    "no-param-reassign": "off",
+    "no-plusplus": "off",
+    "no-underscore-dangle": "off",
+    "no-undefined": "off",
+    "no-unused-expressions": "off",
+    "prefer-rest-params": "off"
+  }
+}
