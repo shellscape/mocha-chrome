@@ -1,4 +1,4 @@
-const deepAssign = require('deep-assign');
+const mergeOptions = require('merge-options');
 
 const log = require('loglevel');
 const unmirror = require('chrome-unmirror');
@@ -18,7 +18,7 @@ process.on('unhandledRejection', (error) => {
 class MochaChrome {
   constructor(options) {
     // eslint-disable-next-line no-param-reassign
-    options = deepAssign(
+    options = mergeOptions(
       {
         chromeFlags: [],
         loadTimeout: 1000,

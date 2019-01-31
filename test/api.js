@@ -1,7 +1,7 @@
 /* eslint-disable func-names, no-param-reassign, no-console */
 const path = require('path');
 
-const deepAssign = require('deep-assign');
+const mergeOptions = require('merge-options');
 const chai = require('chai');
 
 const MochaChrome = require('../index');
@@ -11,7 +11,7 @@ const { expect } = chai;
 function test(options) {
   const url = `file://${path.join(__dirname, '/html', `${options.file}.html`)}`;
 
-  options = deepAssign(
+  options = mergeOptions(
     (options = {
       url,
       mocha: { useColors: false },
