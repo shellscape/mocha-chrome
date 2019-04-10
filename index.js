@@ -1,4 +1,5 @@
 const fs = require('fs');
+
 const deepAssign = require('deep-assign');
 
 const log = require('loglevel');
@@ -40,7 +41,9 @@ class MochaChrome {
     log.setLevel(options.logLevel);
 
     const bus = new EventBus(log);
-    this.output = options.file ? fs.createWriteStream(options.file, {flags: 'w'}) : process.stdout;
+    this.output = options.file
+      ? fs.createWriteStream(options.file, { flags: 'w' })
+      : process.stdout;
 
     if (!options.url) {
       this.fail('`options.url` must be specified to run tests');
