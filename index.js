@@ -1,3 +1,4 @@
+const fs = require('fs');
 const deepAssign = require('deep-assign');
 
 const log = require('loglevel');
@@ -39,6 +40,7 @@ class MochaChrome {
     log.setLevel(options.logLevel);
 
     const bus = new EventBus(log);
+    this.output = options.file ? fs.createWriteStream(options.file, {flags: 'w'}) : process.stdout;
 
     if (!options.url) {
       this.fail('`options.url` must be specified to run tests');
@@ -49,7 +51,7 @@ class MochaChrome {
     });
 
     bus.on('mocha', (content) => {
-      process.stdout.write(content);
+      this.output.write(content);
     });
 
     bus.on('width', (/* content */) => {
@@ -163,6 +165,9 @@ class MochaChrome {
 
   async exit(/* code */) {
     this.closed = true;
+    if (this.options.file) {
+      this.output.end();
+    }
     await this.client.close();
     await this.instance.kill();
 
