@@ -52,14 +52,15 @@
     };
     m.run = function mrun() {
       window._eventbus.emit('started', m.suite.suites.length);
+      var done = () => {
+        setTimeout(() => window._eventbus.emit('ended', m.runner.stats), 1);
+      };
 
       m.runner = origRun.apply(mocha, arguments);
       if (m.runner.stats && m.runner.stats.end) {
-        window._eventbus.emit('ended', m.runner.stats);
+        done();
       } else {
-        m.runner.on('end', () => {
-          window._eventbus.emit('ended', m.runner.stats);
-        });
+        m.runner.on('end', done);
       }
       return m.runner;
     };
