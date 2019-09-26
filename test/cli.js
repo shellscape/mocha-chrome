@@ -22,13 +22,13 @@ describe('mocha-chrome binary', () => {
   });
 
   it('should run a successful test', async () => {
-    const { code } = await cli(['test/html/test.html'], { cwd });
-    expect(code).to.equal(0);
+    const { exitCode } = await cli(['test/html/test.html'], { cwd });
+    expect(exitCode).to.equal(0);
   });
 
   it('should run a failing test', (done) => {
     cli(['test/html/fail.html'], { cwd }).catch((err) => {
-      expect(err.code).to.equal(1);
+      expect(err.exitCode).to.equal(1);
       expect(err.stdout).to.match(/1 failing/);
       done();
     });
@@ -47,10 +47,10 @@ describe('mocha-chrome binary', () => {
 
   it('should allow use of --chrome-flags', async () => {
     const chromeFlags = JSON.stringify(['--allow-file-access-from-files']);
-    const { code } = await cli(['test/html/test.html', '--chrome-flags', chromeFlags], {
+    const { exitCode } = await cli(['test/html/test.html', '--chrome-flags', chromeFlags], {
       cwd
     });
-    expect(code).to.equal(0);
+    expect(exitCode).to.equal(0);
   });
 
   it('should use the --timeout flag value', async () => {
