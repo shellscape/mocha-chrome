@@ -2,7 +2,7 @@ version: 2
 jobs:
   dependency_cache:
     docker:
-      - image: rollupcabal/circleci-node-base:latest
+      - image: circleci/node:8.16.1-browsers
     steps:
       - checkout
       - restore_cache:
@@ -14,9 +14,9 @@ jobs:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
-  node-v8-latest:
+  node-v10-latest:
     docker:
-      - image: rollupcabal/circleci-node-v8:latest
+      - image: circleci/node:8.16.1-browsers
     steps:
       - checkout
       - restore_cache:
@@ -27,9 +27,13 @@ jobs:
       - run:
           name: Run unit tests.
           command: npm run ci:test
+      - run:
+          name: Submit coverage data to codecov.
+          command: bash <(curl -s https://codecov.io/bash)
+          when: on_success
   analysis:
     docker:
-      - image: rollupcabal/circleci-node-base:latest
+      - image: circleci/node:8.16.1-browsers
     steps:
       - checkout
       - restore_cache:
@@ -57,7 +61,7 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - node-v8-latest:
+      - node-v10-latest:
           requires:
             - analysis
           filters:
