@@ -2,11 +2,14 @@ version: 2
 jobs:
   dependency_cache:
     docker:
-      - image: rollupcabal/circleci-node-base:latest
+      - image: selenium/standalone-chrome:3.1.0
     steps:
       - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
+      - run:
+          name: Node Info
+          command: node --version && npm --version
       - run:
           name: Install Dependencies
           command: npm install
@@ -14,19 +17,29 @@ jobs:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
-  node-v8-latest:
-    docker:
-      - image: rollupcabal/circleci-node-v8:latest
+  node-v12-latest:
+    machine: true
     steps:
       - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
-          name: NPM Rebuild
-          command: npm install
+          name: Setup Node 12 and Run Tests
+          command: |
+            set +e
+            touch $BASH_ENV
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+            export NVM_DIR="/opt/circleci/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm install 12
+            nvm alias default 12
+            node --version && npm --version
+            npm install
+            npm run ci:coverage
       - run:
-          name: Run unit tests.
-          command: npm run ci:test
+          name: Submit coverage data to codecov.
+          command: bash <(curl -s https://codecov.io/bash)
+          when: on_success
   analysis:
     docker:
       - image: rollupcabal/circleci-node-base:latest
@@ -57,7 +70,7 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - node-v8-latest:
+      - node-v12-latest:
           requires:
             - analysis
           filters:
