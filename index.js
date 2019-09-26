@@ -130,9 +130,7 @@ class MochaChrome {
 
         if (!unmirror(res.result)) {
           this.fail(
-            `mocha was not found in the page within ${
-              this.options.loadTimeout
-            }ms of the page loading.`
+            `mocha was not found in the page within ${this.options.loadTimeout}ms of the page loading.`
           );
         }
 

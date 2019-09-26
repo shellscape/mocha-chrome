@@ -1,14 +1,16 @@
+[tests]: 	https://img.shields.io/circleci/project/github/shellscape/mocha-chrome.svg
+[tests-url]: https://circleci.com/gh/shellscape/mocha-chrome
+
+[size]: https://packagephobia.now.sh/badge?p=mocha-chrome
+[size-url]: https://packagephobia.now.sh/result?p=mocha-chrome
+
+[![tests][tests]][tests-url]
+[![size][size]][size-url]
+[![libera manifesto](https://img.shields.io/badge/libera-manifesto-lightgrey.svg)](https://liberamanifesto.com)
+
 # mocha-chrome
 
 :coffee: Run Mocha tests using headless Google Chrome
-
-[![Build Status](https://travis-ci.org/shellscape/mocha-chrome.svg?branch=master)](https://travis-ci.org/shellscape/mocha-chrome)
-[![Known Vulnerabilities](https://snyk.io/test/github/shellscape/mocha-chrome/badge.svg)](https://snyk.io/test/github/shellscape/mocha-chrome)
-[![npm version](https://badge.fury.io/js/mocha-chrome.svg)](https://badge.fury.io/js/mocha-chrome)
-[![GitHub version](https://badge.fury.io/gh/shellscape%2Fmocha-chrome.svg)](http://badge.fury.io/gh/shellscape%2Fmocha-chrome)
-[![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
-[![Dependency Status](https://david-dm.org/shellscape/mocha-chrome.svg)](https://david-dm.org/shellscape/mocha-chrome)
-[![devDependencies Status](https://david-dm.org/shellscape/mocha-chrome/dev-status.svg)](https://david-dm.org/shellscape/mocha-chrome?type=dev)
 
 ## Requirements
 

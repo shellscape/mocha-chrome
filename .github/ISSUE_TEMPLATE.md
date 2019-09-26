@@ -1,32 +1,13 @@
-> Please note that this template is not optional. If you proceed with this form,
-please fill out **_all_** fields, or your issue may be closed as "invalid."
-Please do not delete this template. Please do remove this header to acknowledge this message.
+<!--
+  👉🏽 Need help or support? Open a SUPPORT issue instead.
 
-* Operating System:
-* Node Version:
-* NPM Version:
-* mocha Version:
-* mocha-chrome Version:
+  Ahoy!
 
-<!-- Please place an x in all [ ] that apply -->
+  You're seeing this because you felt none of the other options fit the type of
+  issue you'd like to create. Please use this opportunity to tell us about the
+  type of issue you were looking for, so we can try to accommodate similar
+  issues in the future.
 
-- [ ] This is a **feature** request
-- [ ] This is a **bug**
-
-### Code
-
-<!-- If you have a large amount of code to share which demonstrates the problem you're
-experiencing, please provide a link to your repository rather than pasting code.
-Otherwise, please paste relevant short snippets below. -->
-
-```js
-  // code
-```
-
-### Expected Behavior
-
-### Actual Behavior
-
-### For Bugs; How can we reproduce the behavior?
-
-### For Features; What is the motivation and/or use-case for the feature?
+  If you're using this template to report an issue covered by an existing issue
+  type, we'll close it as invalid faster than you can spell 'Mississippi'.
+-->

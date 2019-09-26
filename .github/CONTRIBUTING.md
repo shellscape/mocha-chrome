@@ -1,31 +1,15 @@
-# Welcome!
-:heart: Thanks for your interest and time in contributing to this project.
+## Contributing in mocha-chrome
 
-## What We Use
+We 💛 contributions! The rules for contributing to this org are few:
 
-- Linting: [ESLint](http://eslint.org/)
-- NPM: [NPM as a Build Tool](https://css-tricks.com/using-npm-build-tool/)
+1. Don't be a jerk
+1. Search issues before opening a new one
+1. Lint and run tests locally before submitting a PR
+1. Adhere to the code style the org has chosen
 
-## Pull Requests
 
-Please lint your changes before submitting a Pull Request. You can lint your
-changes by running:
+## Before Committing
 
-```console
-$ npm run lint
-```
-
-Please avoid committing `package-lock.json` files.
-
-Please don't change variable or parameter names to match your
-personal preferences, unless the change is part of a refactor
-or significant modification of the codebase (which is very rare).
-
-Please remember to thoroughly explain your Pull Request if it
-doesn't have an associated issue. If you're changing code
-significantly, please remember to add inline or block comments
-in the code as appropriate.
-
-## Thanks
-
-For your interest, time, understanding, and for following this simple guide.
+1. Use at least Node.js v10.11.0 or higher. [NVM](https://github.com/creationix/nvm) can be handy for switching between Node versions.
+1. Lint your changes via `npm run lint`. Fix any errors and warnings before committing.
+1. Test your changes via `npm run test`. Only Pull Requests with passing tests will be accepted.

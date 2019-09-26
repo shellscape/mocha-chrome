@@ -1,33 +1,37 @@
-> Thank you for submitting a pull request! Please note that this template is not
-optional. Please fill out **_all_** fields, or your pull request may be rejected.
-Please do not delete this template. Please do remove this header to acknowledge this message.
-
-<!-- Please place an x in all [ ] that apply -->
-
-- [ ] This is a **bugfix**
-- [ ] This is a new **feature**
-- [ ] This is a **code refactor**
-- [ ] This is a **test update**
-- [ ] This is a **typo fix**
-- [ ] This is a **metadata update**
-
-### For Bugs and Features; did you add new tests?
-
-<!-- Please note that we won't approve your changes if you don't add tests. -->
-
-### Motivation / Use-Case
-
 <!--
-  Please explain the **motivation** or use-case for making this change.
-  What existing problem does the pull request solve?
-  If this Pull Request addresses an issue, please link to the issue.
+  ⚡️ katchow! We ❤️ Pull Requests!
+
+  If you remove or skip this template, you'll make the 🐼 sad and the mighty god
+  of Github will appear and pile-drive the close button from a great height
+  while making animal noises.
+
+  Pull Request Requirements:
+  * Please include tests to illustrate the problem this PR resolves.
+  * Please lint your changes by running `npm run lint` before creating a PR.
+
+  Please place an x ([x]) in all [ ] that apply.
 -->
 
-### Breaking Changes
+This PR contains:
+
+- [ ] bugfix
+- [ ] feature
+- [ ] refactor
+- [ ] tests
+- [ ] documentation
+- [ ] metadata
+
+### Breaking Changes?
+
+- [ ] yes
+- [ ] no
+
+If yes, please describe the breakage.
+
+### Please Describe Your Changes
 
 <!--
-  If this PR introduces a breaking change, please describe the impact and a
-  migration path for existing applications.
+  Please be thorough and clearly explain the problem being solved.
+  * If this PR adds a feature, look for previous discussion on the feature by searching the issues first.
+  * Is this PR related to an issue?
 -->
-
-### Additional Info
