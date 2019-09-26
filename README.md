@@ -88,10 +88,7 @@ $ mocha-chrome --help
 
 ## Events
 
-`mocha-chrome` is technically an event emitter. Due to the asynchronous nature of
-nearly every interaction with headless Chrome, a simple event bus is used to
-handle actions from the browser. You have access to those events if running
-`mocha-chrome` programatically.
+`mocha-chrome` is technically an event emitter. Due to the asynchronous nature of nearly every interaction with headless Chrome, a simple event bus is used to handle actions from the browser. You have access to those events if running `mocha-chrome` programatically.
 
 Example usage can be found in both [test.js](test/test.js) and [bin/mocha-chrome](bin/mocha-chrome).
 
@@ -143,30 +140,21 @@ Example usage can be found in both [test.js](test/test.js) and [bin/mocha-chrome
 
 #### `width`
 
-  Fired to indicate that `mocha-chrome` should inform mocha of the width of
-  the current console/terminal.
+  Fired to indicate that `mocha-chrome` should inform mocha of the width of the current console/terminal.
 
 ## Limitations
 
 ### Reporters
 
-Reporters are limited to those which don't use `process.stdout.write` to manipulate
-terminal output. eg. `spec`, `xunit`, etc. Examples of reporters which don't presently
-produce expected output formatting include `dot` and `nyan`. The cause of this
-limitation is the lack of a good means to pipe Mocha's built-in `stdout.write`
-through the Chrome Devtools Protocol to `mocha-chrome`.
+Reporters are limited to those which don't use `process.stdout.write` to manipulate terminal output. eg. `spec`, `xunit`, etc. Examples of reporters which don't presently produce expected output formatting include `dot` and `nyan`. The cause of this limitation is the lack of a good means to pipe Mocha's built-in `stdout.write` through the Chrome Devtools Protocol to `mocha-chrome`.
 
 ### Third-Party Reporters
 
-Third party reporters are not currently supported, but support is planned. Contribution
-on that effort is of course welcome.
+Third party reporters are not currently supported, but support is planned. Contribution on that effort is of course welcome.
 
 ### Cookies and the `file://` Protocol
 
-Chrome has long-since disabled cookies for files loaded via the `file://` protocol.
-The once-available `--enable-file-cookies` has been removed and we're left with few options.
-If you're in need of cookie support for your local-file test, you may use the following snippet,
-which will shim `document.cookie` with _very basic_ support:
+Chrome has long-since disabled cookies for files loaded via the `file://` protocol. The once-available `--enable-file-cookies` has been removed and we're left with few options. If you're in need of cookie support for your local-file test, you may use the following snippet, which will shim `document.cookie` with _very basic_ support:
 
 ```js
   Object.defineProperty(document, 'cookie', {
@@ -189,20 +177,19 @@ which will shim `document.cookie` with _very basic_ support:
 
 ## Continuous Integration
 
+### Circle CI
+
+Running on Circle CI requires that Chrome is installed and running in the container your tests are running within. Please refer to this article for details: https://discuss.circleci.com/t/installing-chrome-inside-of-your-docker-container/9067. Alternatively, you can use a pre-built CircleCI image with browsers installed. You'll have to choose a tag with the `-browsers` suffix from the [full tag list](https://circleci.com/docs/2.0/docker-image-tags.json).
+
+### Travis CI
+
 Please refer to the _"Running it all on Travis CI"_ portion of the guide on [Automated testing with Headless Chrome](https://developers.google.com/web/updates/2017/06/headless-karma-mocha-chai) from
 Google. Though the article primarily addresses Karma, the setup for Travis CI is
 identical.
 
-### _Update: January 8th, 2018_
+As of January 8th, 2018, Travis CI has upgraded from Trusty -> Xenial to address the [Meltdown](https://en.wikipedia.org/wiki/Meltdown_(security_vulnerability)) security vulnerability. There are issues with Chrome in Xenial that can currently be worked around with `sudo: required`. At some point this workaround may be removable. For the near term, please add `sudo: required` to Travis CI configuration files. See [travis-ci/travis-ci#8836](travis-ci/travis-ci#8836). Credit: [@smalls](https://github.com/shellscape/mocha-chrome/pull/21).
 
-Travis CI has upgraded from Trusty -> Xenial to address the
-[Meltdown](https://en.wikipedia.org/wiki/Meltdown_(security_vulnerability))
-security vulnerability. There are issues with Chrome in
-Xenial that can currently be worked around with `sudo: required`.
-At some point this workaround may be removable. For the near term,
-please add `sudo: required` to Travis CI configuration files. 
-See [travis-ci/travis-ci#8836](travis-ci/travis-ci#8836).
-Credit: [@smalls](https://github.com/shellscape/mocha-chrome/pull/21).
+
 
 ## Testing mocha-chrome
 
@@ -218,9 +205,4 @@ We welcome your contributions! Please have a read of [CONTRIBUTING](.github/CONT
 
 ## Attribution
 
-I'd like to thank @nathanboktae for his work on [mocha-phantomjs](https://github.com/nathanboktae/mocha-phantomjs)
-and [mocha-phantomjs-core](https://github.com/nathanboktae/mocha-phantomjs-core);
-two projects I've used extensively over the years, and from which the inspiration
-for this module originates. Many of the nuances of working with mocha in a hosted
-or connected browser environment were solved within `mocha-phantomjs-core` and I
-am personally grateful.
+I'd like to thank @nathanboktae for his work on [mocha-phantomjs](https://github.com/nathanboktae/mocha-phantomjs) and [mocha-phantomjs-core](https://github.com/nathanboktae/mocha-phantomjs-core); two projects I've used extensively over the years, and from which the inspiration for this module originates. Many of the nuances of working with mocha in a hosted or connected browser environment were solved within `mocha-phantomjs-core` and I am personally grateful.
