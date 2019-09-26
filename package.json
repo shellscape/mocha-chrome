@@ -1,6 +1,6 @@
 {
   "name": "mocha-chrome",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "☕  Run Mocha tests using headless Google Chrome",
   "license": "MIT",
   "repository": "shellscape/mocha-chrome",
@@ -23,6 +23,14 @@
     "security": "npm audit",
     "test": "mocha test/test.js --timeout 10000 --exit"
   },
+  "files": [
+    "client",
+    "lib",
+    "cli.js",
+    "index.js",
+    "LICENSE",
+    "README.md"
+  ],
   "dependencies": {
     "chalk": "^2.0.1",
     "chrome-launcher": "^0.11.2",
