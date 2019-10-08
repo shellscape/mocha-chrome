@@ -70,6 +70,7 @@ $ mocha-chrome --help
 
   Options
     --chrome-flags              A JSON string representing an array of flags to pass to Chrome
+    --chrome-launch.xxx=yyy     Options for chrome launcher except for chromeFlags and logLevel (see https://github.com/GoogleChrome/chrome-launcher#launchopts)
     --ignore-console            Suppress console logging
     --ignore-exceptions         Suppress exceptions logging
     --ignore-resource-errors    Suppress resource error logging

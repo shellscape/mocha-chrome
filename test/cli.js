@@ -53,6 +53,20 @@ describe('mocha-chrome binary', () => {
     expect(exitCode).to.equal(0);
   });
 
+  it('should allow use of --chrome-launch', async () => {
+    const { exitCode } = await cli(
+      [
+        'test/html/test.html',
+        '--chrome-launch.connectionPollInterval=1500',
+        '--chrome-launch.maxConnectionRetries=10'
+      ],
+      {
+        cwd
+      }
+    );
+    expect(exitCode).to.equal(0);
+  });
+
   it('should use the --timeout flag value', async () => {
     const { stdout } = await cli(['--timeout', '2000', 'test/html/mocha-run-timeout-1500.html'], {
       cwd
