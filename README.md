@@ -70,6 +70,7 @@ $ mocha-chrome --help
 
   Options
     --chrome-flags              A JSON string representing an array of flags to pass to Chrome
+    --chrome-launcher             Chrome launcher options (see https://github.com/GoogleChrome/chrome-launcher#launchopts)
     --ignore-console            Suppress console logging
     --ignore-exceptions         Suppress exceptions logging
     --ignore-resource-errors    Suppress resource error logging
@@ -83,7 +84,7 @@ $ mocha-chrome --help
   Examples
     $ mocha-chrome test.html --no-colors
     $ mocha-chrome test.html --reporter dot
-    $ mocha-chrome test.html --mocha '{"ui":"tdd"}'
+    $ mocha-chrome test.html --mocha '{"ui":"tdd"}' --chrome-launcher.maxConnectionRetries=10
 ```
 
 ## Events
