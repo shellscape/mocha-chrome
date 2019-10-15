@@ -53,12 +53,12 @@ describe('mocha-chrome binary', () => {
     expect(exitCode).to.equal(0);
   });
 
-  it('should allow use of --chrome-launch', async () => {
+  it('should allow use of --chrome-launcher', async () => {
     const { exitCode } = await cli(
       [
         'test/html/test.html',
-        '--chrome-launch.connectionPollInterval=1500',
-        '--chrome-launch.maxConnectionRetries=10'
+        '--chrome-launcher.connectionPollInterval=1500',
+        '--chrome-launcher.maxConnectionRetries=10'
       ],
       {
         cwd

@@ -21,7 +21,7 @@ class MochaChrome {
     options = deepAssign(
       {
         chromeFlags: [],
-        chromeLaunch: {},
+        chromeLauncher: {},
         loadTimeout: 1000,
         logLevel: 'error',
         ignoreExceptions: false,
