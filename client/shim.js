@@ -12,7 +12,7 @@
       mochaOptions = mochaOptions || {
         ui: 'bdd',
         reporter: 'spec',
-        useColors: true
+        colors: true
       };
 
       mocha.setup(mochaOptions);
