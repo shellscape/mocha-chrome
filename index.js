@@ -82,13 +82,13 @@ class MochaChrome {
       this.exit(stats.failures);
     });
 
-    bus.on('resourceFailed', (/* data */) => {
-      this.loadError = true;
+    bus.on('resourceFailed', (resource) => {
+      this.failedResources.push(resource.url);
     });
 
     this.bus = bus;
     this.options = options;
-    this.loadError = false;
+    this.failedResources = [];
   }
 
   async connect() {
@@ -116,8 +116,12 @@ class MochaChrome {
         return;
       }
 
-      if (this.loadError) {
-        this.fail(`Failed to load the page. Check the url: ${this.options.url}`);
+      if (this.failedResources.length && !this.options.ignoreResourceErrors) {
+        this.fail(`The following resources failed to load on the page:
+
+${this.failedResources.join('\n')}
+
+Yoou may suprress these failures with --ignore-resource-errors`);
         return;
       }
 
