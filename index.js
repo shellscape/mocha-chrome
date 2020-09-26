@@ -121,7 +121,7 @@ class MochaChrome {
 
 ${this.failedResources.join('\n')}
 
-Yoou may suprress these failures with --ignore-resource-errors`);
+You may suprress these failures with --ignore-resource-errors`);
         return;
       }
 
