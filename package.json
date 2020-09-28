@@ -20,7 +20,7 @@
     "commitmsg": "commitlint -e $GIT_PARAMS",
     "lint": "eslint --fix --cache cli.js index.js client lib test",
     "lint-staged": "lint-staged",
-    "security": "npm audit",
+    "security": "npm audit --audit-level=moderate",
     "test": "mocha test/test.js --timeout 10000 --exit"
   },
   "files": [
@@ -33,7 +33,7 @@
   ],
   "dependencies": {
     "chalk": "^2.0.1",
-    "chrome-launcher": "^0.11.2",
+    "chrome-launcher": "^0.13.4",
     "chrome-remote-interface": "^0.28.0",
     "chrome-unmirror": "^0.1.0",
     "debug": "^4.1.1",
@@ -44,13 +44,13 @@
     "nanobus": "^4.2.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^8.2.0",
-    "@commitlint/config-conventional": "^8.2.0",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
     "chai": "^4.2.0",
     "eslint-config-shellscape": "^2.1.0",
-    "execa": "^2.0.4",
-    "lint-staged": "^9.4.0",
-    "mocha": "^6.2.0",
+    "execa": "^4.0.3",
+    "lint-staged": "^10.4.0",
+    "mocha": "^6.2.3",
     "pre-commit": "^1.2.2"
   },
   "lint-staged": {

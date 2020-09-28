@@ -2,7 +2,7 @@ version: 2
 jobs:
   dependency_cache:
     docker:
-      - image: circleci/node:8.16.1-browsers
+      - image: circleci/node:14-browsers
     steps:
       - checkout
       - restore_cache:
@@ -14,9 +14,9 @@ jobs:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
-  node-v10-latest:
+  node-v14-latest:
     docker:
-      - image: circleci/node:8.16.1-browsers
+      - image: circleci/node:14-browsers
     steps:
       - checkout
       - restore_cache:
@@ -33,7 +33,7 @@ jobs:
           when: on_success
   analysis:
     docker:
-      - image: circleci/node:8.16.1-browsers
+      - image: circleci/node:14-browsers
     steps:
       - checkout
       - restore_cache:
@@ -61,7 +61,7 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - node-v10-latest:
+      - node-v14-latest:
           requires:
             - analysis
           filters:
