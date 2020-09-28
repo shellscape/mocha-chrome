@@ -27,7 +27,7 @@ describe('mocha-chrome binary', () => {
   });
 
   it('should run a failing test', async () => {
-    const { stdout, exitCode } = cli(['test/html/fail.html']);
+    const { stdout, exitCode } = await cli(['test/html/fail.html']);
     expect(exitCode).to.equal(1);
     expect(stdout).to.match(/1 failing/);
   });
