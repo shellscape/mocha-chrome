@@ -30,7 +30,7 @@ class MochaChrome {
         mocha: {
           reporter: 'spec',
           ui: 'bdd',
-          useColors: true
+          colors: true
         }
       },
       options

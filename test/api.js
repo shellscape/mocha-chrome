@@ -14,7 +14,7 @@ function test(options) {
   options = deepAssign(
     (options = {
       url,
-      mocha: { useColors: false },
+      mocha: { colors: false },
       ignoreConsole: true,
       ignoreExceptions: true,
       ignoreResourceErrors: true
