@@ -31,6 +31,9 @@
     "LICENSE",
     "README.md"
   ],
+  "peerDependencies": {
+    "mocha": ">= 7.0.0"
+  },
   "dependencies": {
     "chalk": "^2.0.1",
     "chrome-launcher": "^0.13.4",
