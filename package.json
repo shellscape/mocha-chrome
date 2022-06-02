@@ -1,6 +1,6 @@
 {
-  "name": "mocha-chrome",
-  "version": "2.2.0",
+  "name": "digabi-mocha-chrome",
+  "version": "2.3.0",
   "description": "☕  Run Mocha tests using headless Google Chrome",
   "license": "MIT",
   "repository": "shellscape/mocha-chrome",
@@ -31,6 +31,9 @@
     "LICENSE",
     "README.md"
   ],
+  "peerDependencies": {
+    "mocha": ">= 7.0.0"
+  },
   "dependencies": {
     "chalk": "^2.0.1",
     "chrome-launcher": "^0.13.4",
