@@ -55,10 +55,14 @@
 
       m.runner = origRun.apply(mocha, arguments);
       if (m.runner.stats && m.runner.stats.end) {
-        window._eventbus.emit('ended', m.runner.stats);
+        setTimeout(()=>{
+          window._eventbus.emit('ended', m.runner.stats);
+        }, 2000)
       } else {
         m.runner.on('end', () => {
-          window._eventbus.emit('ended', m.runner.stats);
+          setTimeout(()=>{
+            window._eventbus.emit('ended', m.runner.stats);
+          }, 2000)
         });
       }
       return m.runner;
