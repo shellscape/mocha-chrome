@@ -6,7 +6,10 @@
   "repository": "shellscape/mocha-chrome",
   "author": "shellscape",
   "type": "module",
-  "exports": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./cli": "./cli.js"
+  },
   "bin": {
     "mocha-chrome": "./cli.js"
   },
