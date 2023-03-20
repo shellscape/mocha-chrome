@@ -5,12 +5,13 @@
   "license": "MIT",
   "repository": "shellscape/mocha-chrome",
   "author": "shellscape",
-  "main": "index.js",
+  "type": "module",
+  "exports": "./index.js",
   "bin": {
     "mocha-chrome": "./cli.js"
   },
   "engines": {
-    "node": ">= 16.0.0"
+    "node": ">=16.0.0"
   },
   "scripts": {
     "ci:lint": "npm run lint && npm run security",
@@ -21,7 +22,7 @@
     "lint": "eslint --fix --cache cli.js index.js client lib test",
     "lint-staged": "lint-staged",
     "security": "npm audit --audit-level=moderate",
-    "test": "mocha test/test.js --timeout 10000 --exit"
+    "test": "mocha test/*.js --timeout 10000 --exit"
   },
   "files": [
     "client",
@@ -32,26 +33,32 @@
     "README.md"
   ],
   "dependencies": {
-    "chalk": "^2.0.1",
-    "chrome-launcher": "^0.13.4",
-    "chrome-remote-interface": "^0.28.0",
+    "chalk": "^5.2.0",
+    "chrome-launcher": "^0.15.1",
+    "chrome-remote-interface": "^0.32.1",
     "chrome-unmirror": "^0.1.0",
-    "debug": "^4.1.1",
+    "debug": "^4.3.4",
     "deep-assign": "^3.0.0",
-    "import-local": "^2.0.0",
-    "loglevel": "^1.4.1",
-    "meow": "^5.0.0",
-    "nanobus": "^4.2.0"
+    "import-local": "^3.1.0",
+    "loglevel": "^1.8.1",
+    "meow": "^11.0.0",
+    "nanobus": "^4.5.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^11.0.0",
-    "@commitlint/config-conventional": "^11.0.0",
-    "chai": "^4.2.0",
-    "eslint-config-shellscape": "^2.1.0",
-    "execa": "^4.0.3",
-    "lint-staged": "^10.4.0",
-    "mocha": "^6.2.3",
-    "pre-commit": "^1.2.2"
+    "@commitlint/cli": "^17.4.4",
+    "@commitlint/config-conventional": "^17.4.4",
+    "@types/deep-assign": "^0.1.1",
+    "chai": "^4.3.7",
+    "eslint": "^8.36.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "execa": "^7.1.1",
+    "lint-staged": "^13.2.0",
+    "mocha": "^7.2.0",
+    "pre-commit": "^1.2.2",
+    "prettier": "^2.8.5"
   },
   "lint-staged": {
     "*.js": [
