@@ -10,7 +10,7 @@
     "mocha-chrome": "./cli.js"
   },
   "engines": {
-    "node": ">= 8.0.0"
+    "node": ">= 16.0.0"
   },
   "scripts": {
     "ci:lint": "npm run lint && npm run security",
