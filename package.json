@@ -44,6 +44,9 @@
     "meow": "^11.0.0",
     "nanobus": "^4.5.0"
   },
+  "peerDependencies": {
+    "mocha": ">=10.0.0"
+  },
   "devDependencies": {
     "@commitlint/cli": "^17.4.4",
     "@commitlint/config-conventional": "^17.4.4",
@@ -56,7 +59,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "execa": "^7.1.1",
     "lint-staged": "^13.2.0",
-    "mocha": "^7.2.0",
+    "mocha": "^10.2.0",
     "pre-commit": "^1.2.2",
     "prettier": "^2.8.5"
   },
