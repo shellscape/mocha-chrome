@@ -1,12 +1,21 @@
 #!/usr/bin/env node
 
-const debug = require('debug')('mocha-chrome');
-const importLocal = require('import-local');
+import { fileURLToPath } from 'url'
+
+import importLocal from 'import-local'
+
+import debug from 'debug'
+
+import { run } from './lib/cli.js'
+
+const nsDebug = debug('mocha-chrome')
+
+const __filename = fileURLToPath(import.meta.url)
 
 // Prefer the local installation of AVA
 if (importLocal(__filename)) {
-  debug('Using local install of mocha-chrome');
+  nsDebug('Using local install of mocha-chrome')
 } else {
   // eslint-disable-next-line global-require
-  require('./lib/cli');
+  run()
 }

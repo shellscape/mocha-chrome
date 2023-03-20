@@ -1,15 +1,20 @@
 /* eslint-disable func-names, no-param-reassign, no-console */
-const path = require('path');
+import path from 'path'
 
-const deepAssign = require('deep-assign');
-const chai = require('chai');
+import { fileURLToPath } from 'url'
 
-const MochaChrome = require('../index');
+import deepAssign from 'deep-assign'
+import chai from 'chai'
 
-const { expect } = chai;
+import MochaChrome from '../index.js'
 
-function test(options) {
-  const url = `file://${path.join(__dirname, '/html', `${options.file}.html`)}`;
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
+const { expect } = chai
+
+function test (options) {
+  const url = `file://${path.join(__dirname, '/html', `${options.file}.html`)}`
 
   options = deepAssign(
     (options = {
@@ -20,25 +25,25 @@ function test(options) {
       ignoreResourceErrors: true
     }),
     options
-  );
+  )
 
-  const runner = new MochaChrome(options);
+  const runner = new MochaChrome(options)
   const result = new Promise((resolve, reject) => {
     runner.on('ended', (stats) => {
-      resolve(stats);
-    });
+      resolve(stats)
+    })
 
     runner.on('failure', (message) => {
-      reject(message);
-    });
+      reject(message)
+    })
   });
 
-  (async function() {
-    await runner.connect();
-    await runner.run();
-  })();
+  (async function () {
+    await runner.connect()
+    await runner.run()
+  })()
 
-  return result;
+  return result
 }
 
 describe('MochaChrome', () => {
@@ -46,30 +51,30 @@ describe('MochaChrome', () => {
     test({ file: 'no-mocha' }).catch((message) => {
       expect(message).to.equal(
         'mocha was not found in the page within 1000ms of the page loading.'
-      );
-    }));
+      )
+    }))
 
   it("fails if mocha.run isn't called", () =>
     test({ file: 'no-run' }).catch((message) => {
-      expect(message).to.equal('mocha.run() was not called within 1000ms of the page loading.');
-    }));
+      expect(message).to.equal('mocha.run() was not called within 1000ms of the page loading.')
+    }))
 
   it('runs a test', () =>
     test({ file: 'test' }).then(({ passes, failures }) => {
-      expect(passes).to.equal(1);
-      expect(failures).to.equal(0);
-    }));
+      expect(passes).to.equal(1)
+      expect(failures).to.equal(0)
+    }))
 
   it('reports a failure', () =>
     test({ file: 'fail' }).then(({ failures }) => {
-      expect(failures).to.equal(1);
-    }));
+      expect(failures).to.equal(1)
+    }))
 
   it('allows runner modification', () =>
     test({ file: 'runner-mod' }).then(({ passes, failures }) => {
-      expect(passes).to.equal(1);
-      expect(failures).to.equal(1);
-    }));
+      expect(passes, 'Should run one pass').to.equal(1)
+      expect(failures, 'Should fail one test').to.equal(1)
+    }))
 
   it('supports different reporters', () =>
     test({
@@ -78,9 +83,9 @@ describe('MochaChrome', () => {
         reporter: 'xunit'
       }
     }).then(({ passes, failures }) => {
-      expect(passes).to.equal(1);
-      expect(failures).to.equal(0);
-    }));
+      expect(passes).to.equal(1)
+      expect(failures).to.equal(0)
+    }))
 
   it('supports mixed tests', () =>
     test({
@@ -89,24 +94,24 @@ describe('MochaChrome', () => {
         reporter: 'dot'
       }
     }).then(({ passes, failures }) => {
-      expect(passes).to.equal(6);
-      expect(failures).to.equal(6);
-    }));
+      expect(passes).to.equal(6)
+      expect(failures).to.equal(6)
+    }))
 
   it('reports async failures', () =>
     test({ file: 'fail-async' }).then(({ failures }) => {
-      expect(failures).to.equal(3);
-    }));
+      expect(failures).to.equal(3)
+    }))
 
   it('supports test using and clearing localStorage', () =>
     test({ file: 'local-storage' }).then(({ passes, failures }) => {
-      expect(passes).to.equal(2);
-      expect(failures).to.equal(1);
-    }));
+      expect(passes).to.equal(2)
+      expect(failures).to.equal(1)
+    }))
 
   it('handles circular structures in console.log', () =>
     test({ file: 'circular' }).then(({ passes, failures }) => {
-      expect(passes).to.equal(1);
-      expect(failures).to.equal(0);
-    }));
-});
+      expect(passes).to.equal(1)
+      expect(failures).to.equal(0)
+    }))
+})
