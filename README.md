@@ -1,6 +1,5 @@
-[tests]: 	https://img.shields.io/circleci/project/github/shellscape/mocha-chrome.svg
+[tests]: https://img.shields.io/circleci/project/github/shellscape/mocha-chrome.svg
 [tests-url]: https://circleci.com/gh/shellscape/mocha-chrome
-
 [size]: https://packagephobia.now.sh/badge?p=mocha-chrome
 [size-url]: https://packagephobia.now.sh/result?p=mocha-chrome
 
@@ -35,11 +34,11 @@ $ npm install mocha --save-dev
 To run the tests, you'll need an HTML file with some basics:
 
 ```html
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>Test</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <link rel="stylesheet" href="../../node_modules/mocha/mocha.css" />
     <script src="../../node_modules/mocha/mocha.js"></script>
     <script src="../../node_modules/chai/chai.js"></script>
@@ -47,6 +46,7 @@ To run the tests, you'll need an HTML file with some basics:
   <body>
     <div id="mocha"></div>
     <script>
+      mocha.setup("bdd");
       expect = chai.expect;
 
       // add tests here
@@ -55,7 +55,6 @@ To run the tests, you'll need an HTML file with some basics:
     </script>
   </body>
 </html>
-
 ```
 
 You can then add your tests either through an external script file or inline within a `<script>` tag. Running the tests is easy, either with the CLI binary, or programmatically.
@@ -97,53 +96,58 @@ Example usage can be found in both [test.js](test/test.js) and [bin/mocha-chrome
 
 #### `config`
 
-  Fired to indicate that `mocha-chrome` should configure mocha.
+Fired to indicate that `mocha-chrome` should configure mocha.
 
 #### `ended`
 
-  Fired when all tests have ended.
+Fired when all tests have ended.
 
 ##### Parameters
-  `stats` : `object` - A Mocha stats object. eg:
 
-  ```js
-  {
-    suites: 1,
-    tests: 1,
-    passes: 1,
-    pending: 0,
-    failures: 0,
-    start: '2017-08-03T02:12:02.007Z',
-    end: '2017-08-03T02:12:02.017Z',
-    duration: 10
-  }
-  ```
+`stats` : `object` - A Mocha stats object. eg:
+
+```js
+{
+  suites: 1,
+  tests: 1,
+  passes: 1,
+  pending: 0,
+  failures: 0,
+  start: '2017-08-03T02:12:02.007Z',
+  end: '2017-08-03T02:12:02.017Z',
+  duration: 10
+}
+```
 
 #### `ready`
 
-  Fired to indicate that the mocha script in the client has been loaded.
+Fired to indicate that the mocha script in the client has been loaded.
 
 #### `resourceFailed`
 
-  Fired when a resource fails to load.
+Fired when a resource fails to load.
 
-  ##### Parameters
-  `data` : `object` - An object containing information about the resource. eg:
+##### Parameters
 
-  ```js
-  { url, method, reason }
-  ```
+`data` : `object` - An object containing information about the resource. eg:
+
+```js
+{
+  url, method, reason;
+}
+```
 
 #### `started`
 
-  Fired when a resource fails to load.
+Fired when a resource fails to load.
 
-  ##### Parameters
-  `tests` : `number` - The number of tests being run.
+##### Parameters
+
+`tests` : `number` - The number of tests being run.
 
 #### `width`
 
-  Fired to indicate that `mocha-chrome` should inform mocha of the width of the current console/terminal.
+Fired to indicate that `mocha-chrome` should inform mocha of the width of the current console/terminal.
 
 ## Limitations
 
@@ -160,22 +164,22 @@ Third party reporters are not currently supported, but support is planned. Contr
 Chrome has long-since disabled cookies for files loaded via the `file://` protocol. The once-available `--enable-file-cookies` has been removed and we're left with few options. If you're in need of cookie support for your local-file test, you may use the following snippet, which will shim `document.cookie` with _very basic_ support:
 
 ```js
-  Object.defineProperty(document, 'cookie', {
-    get: function () {
-      return this.value || '';
-    },
-    set: function (cookie) {
-      cookie = cookie || '';
+Object.defineProperty(document, "cookie", {
+  get: function () {
+    return this.value || "";
+  },
+  set: function (cookie) {
+    cookie = cookie || "";
 
-      const cutoff = cookie.indexOf(';');
-      const pair = cookie.substring(0, cutoff >= 0 ? cutoff : cookie.length);
-      const cookies = this.value ? this.value.split('; ') : [];
+    const cutoff = cookie.indexOf(";");
+    const pair = cookie.substring(0, cutoff >= 0 ? cutoff : cookie.length);
+    const cookies = this.value ? this.value.split("; ") : [];
 
-      cookies.push(pair);
+    cookies.push(pair);
 
-      return this.value = cookies.join('; ');
-    }
-  });
+    return (this.value = cookies.join("; "));
+  },
+});
 ```
 
 ## Continuous Integration
@@ -190,9 +194,7 @@ Please refer to the _"Running it all on Travis CI"_ portion of the guide on [Aut
 Google. Though the article primarily addresses Karma, the setup for Travis CI is
 identical.
 
-As of January 8th, 2018, Travis CI has upgraded from Trusty -> Xenial to address the [Meltdown](https://en.wikipedia.org/wiki/Meltdown_(security_vulnerability)) security vulnerability. There are issues with Chrome in Xenial that can currently be worked around with `sudo: required`. At some point this workaround may be removable. For the near term, please add `sudo: required` to Travis CI configuration files. See [travis-ci/travis-ci#8836](travis-ci/travis-ci#8836). Credit: [@smalls](https://github.com/shellscape/mocha-chrome/pull/21).
-
-
+As of January 8th, 2018, Travis CI has upgraded from Trusty -> Xenial to address the [Meltdown](<https://en.wikipedia.org/wiki/Meltdown_(security_vulnerability)>) security vulnerability. There are issues with Chrome in Xenial that can currently be worked around with `sudo: required`. At some point this workaround may be removable. For the near term, please add `sudo: required` to Travis CI configuration files. See [travis-ci/travis-ci#8836](travis-ci/travis-ci#8836). Credit: [@smalls](https://github.com/shellscape/mocha-chrome/pull/21).
 
 ## Testing mocha-chrome
 
