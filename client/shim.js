@@ -12,7 +12,7 @@
       const mochaOptions = window.mochaOptions || {
         ui: 'bdd',
         reporter: 'spec',
-        colors: true
+        color: true
       }
 
       mocha.setup(mochaOptions)

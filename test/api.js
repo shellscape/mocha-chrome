@@ -19,7 +19,7 @@ function test (options) {
   options = deepAssign(
     (options = {
       url,
-      mocha: { colors: false },
+      mocha: { color: false },
       ignoreConsole: true,
       ignoreExceptions: true,
       ignoreResourceErrors: true
@@ -56,7 +56,9 @@ describe('MochaChrome', () => {
 
   it("fails if mocha.run isn't called", () =>
     test({ file: 'no-run' }).catch((message) => {
-      expect(message).to.equal('mocha.run() was not called within 1000ms of the page loading.')
+      expect(message).to.equal(
+        'mocha.run() was not called within 1000ms of the page loading.'
+      )
     }))
 
   it('runs a test', () =>
