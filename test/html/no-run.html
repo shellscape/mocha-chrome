@@ -1,7 +1,7 @@
 <html>
   <head>
     <title>Test</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <link rel="stylesheet" href="../../node_modules/mocha/mocha.css" />
     <script src="../../node_modules/mocha/mocha.js"></script>
     <script src="../../node_modules/chai/chai.js"></script>
@@ -9,10 +9,14 @@
   <body>
     <div id="mocha"></div>
     <script>
+      mocha.setup("bdd");
+      mocha.checkLeaks();
+    </script>
+    <script>
       expect = chai.expect;
 
-      describe('Tests', function() {
-        it('tests', function() {
+      describe("Tests", function () {
+        it("tests", function () {
           expect(true).to.equal(true);
         });
       });

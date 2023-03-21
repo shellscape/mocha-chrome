@@ -1,8 +1,8 @@
-<!doctype>
+<!DOCTYPE >
 <html>
   <head>
     <title>Test</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <link rel="stylesheet" href="../../node_modules/mocha/mocha.css" />
     <link rel="stylesheet" href="../../node_modules/mocha/non-existant.css" />
     <script src="../../node_modules/mocha/mocha.js"></script>
@@ -11,14 +11,16 @@
   <body>
     <div id="mocha"></div>
     <script>
-      expect = chai.expect;
-
-      describe('Tests', function() {
-        it('passes but a resource (css) fails to load', function() {
+      mocha.setup("bdd");
+      mocha.checkLeaks();
+    </script>
+    <script>
+      const { expect } = chai;
+      describe("Tests", function () {
+        it("passes but a resource (css) fails to load", function () {
           expect(true).to.equal(true);
         });
       });
-
       mocha.run();
     </script>
   </body>

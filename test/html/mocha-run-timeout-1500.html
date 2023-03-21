@@ -1,26 +1,30 @@
-<!doctype>
+<!DOCTYPE >
 <html>
-<head>
-  <title>Test</title>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="../../node_modules/mocha/mocha.css" />
-  <script src="../../node_modules/mocha/mocha.js"></script>
-  <script src="../../node_modules/chai/chai.js"></script>
-</head>
-<body>
-<div id="mocha"></div>
-<script>
-    expect = chai.expect;
+  <head>
+    <title>Test</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../node_modules/mocha/mocha.css" />
+    <script src="../../node_modules/mocha/mocha.js"></script>
+    <script src="../../node_modules/chai/chai.js"></script>
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <script>
+      mocha.setup("bdd");
+      mocha.checkLeaks();
+    </script>
+    <script>
+      expect = chai.expect;
 
-    describe('Tests', function() {
-      it('tests', function() {
-        expect(true).to.equal(true);
+      describe("Tests", function () {
+        it("tests", function () {
+          expect(true).to.equal(true);
+        });
       });
-    });
 
-    setTimeout(function() {
-      mocha.run();
-    }, 1500);
-</script>
-</body>
+      setTimeout(function () {
+        mocha.run();
+      }, 1500);
+    </script>
+  </body>
 </html>
