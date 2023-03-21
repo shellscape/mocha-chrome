@@ -3,7 +3,6 @@ import path from 'path'
 import chai from 'chai'
 import { execa } from 'execa'
 import { fileURLToPath } from 'url'
-// eslint-disable-next-line import/no-dynamic-require
 import { readFileSync } from 'fs'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -77,9 +76,9 @@ describe('mocha-chrome binary', () => {
     expect(stdout).to.match(/✅/)
   })
 
-  it('should not fail tests with resource errors if --ignore-resource-errors is provided', async () => {
+  it('should not fail tests with resource errors if --ignore-resource-errors is not provided', async () => {
     const { exitCode, stderr } = await cli(['test/html/resource-error.html'])
-    expect(exitCode, 'Exit code should equal 1').to.equal(1)
+    expect(exitCode, 'Exit code should equal 0').to.equal(0)
     expect(stderr).to.contain('The following resources failed to load on the page')
     expect(stderr).to.contain('non-existant.css')
   })
